@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-void *stack_init(size_t type_size, size_t element_number)
+void *edsa_stack_init(size_t type_size, size_t element_number)
 {
 	size_t alloc_size = type_size * element_number;
 
