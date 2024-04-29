@@ -6,6 +6,8 @@
 typedef struct{
 	size_t stack_place;
 
+	size_t data_size;
+
 	void *elements;
 }edsa_stack;
 #endif
