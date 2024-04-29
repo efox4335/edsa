@@ -13,5 +13,11 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 	if(alloc_size / element_number != type_size)
 		return NULL;
 
+	void *stack = malloc(alloc_size);
+
+	//if malloc fails
+	if(stack == NULL)
+		return NULL;
+
 
 }
