@@ -4,10 +4,10 @@
 #include <stddef.h>
 
 typedef struct{
-	size_t stack_place;
+	size_t stack_place;//place in stack
 
-	size_t data_size;
+	size_t data_size;//size of each element stored
 
-	void *elements;
+	void *elements;//pointer to the element stack
 }edsa_stack;
 #endif
