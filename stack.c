@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "stack.h"
+#include "edsa_stack.h"
 
 edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 {
