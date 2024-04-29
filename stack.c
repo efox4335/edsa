@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "edsa_stack.h"
 
+//initializes stack returns NULL on error
 edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 {
 	size_t alloc_size = type_size * element_number;
@@ -28,9 +29,15 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 		return NULL;
 	}
 
-	temp_stack_store->stack_size = 0;
+	temp_stack_store->stack_place = 0;
 
 	temp_stack_store->elements = temp_data;
 
 	return temp_stack_store;
+}
+
+//returns number of elements in stack
+size_t edsa_stack_size(edsa_stack *stack)
+{
+	return stack->stack_place + 1;
 }

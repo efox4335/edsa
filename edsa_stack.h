@@ -4,7 +4,7 @@
 #include <stddef.h>
 
 typedef struct{
-	size_t stack_size;
+	size_t stack_place;
 
 	void *elements;
 }edsa_stack;
