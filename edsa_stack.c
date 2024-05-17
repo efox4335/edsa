@@ -46,6 +46,15 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 	return temp_stack_store;
 }
 
+//frees stack
+void edsa_stack_free(edsa_stack *stack)
+{
+	free(stack->elements);
+	free(stack);
+
+	return;
+}
+
 //returns number of elements in stack
 size_t edsa_stack_size(edsa_stack *stack)
 {
