@@ -11,9 +11,10 @@ typedef struct{
 	void *elements;//pointer to the element stack
 }edsa_stack;
 
-const char __edsa_stack_init_no_alloc_size__[] = "edsa_stack_init: stack of zero size allocation attempted\n";
-const char __edsa_stack_init_multiplication_overflow__[] = "edsa_stack_init: stack size multiplication overflowed\n";
-const char __edsa_stack_init_stack_malloc_failed__[] = "edsa_stack_init: stack malloc failed\n";
-const char __edsa_stack_init_stack_data_malloc_failed__[] = "edsa_stack_init: stack data malloc failed\n";
+edsa_stack *edsa_stack_init(size_t type_size, size_t element_number);
+
+void edsa_stack_free(edsa_stack *stack);
+
+size_t edsa_stack_size(edsa_stack *stack);
 
 #endif
