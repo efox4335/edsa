@@ -9,13 +9,13 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 
 	//returns null if no data to be allocated
 	if(alloc_size == 0){
-		fprintf(stderr, "%s", __edsa_stack_no_alloc_size__);
+		fprintf(stderr, "%s", __edsa_stack_init_no_alloc_size__);
 		return NULL;
 	}
 
 	//returns null if multiplication overflows
 	if(alloc_size / element_number != type_size){
-		fprintf(stderr, "%s", __edsa_stack_multiplication_overflow__);
+		fprintf(stderr, "%s", __edsa_stack_init_multiplication_overflow__);
 		return NULL;
 	}
 
@@ -23,7 +23,7 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 
 	//if malloc fails
 	if(temp_data == NULL){
-		fprintf(stderr, "%s", __edsa_stack_stack_malloc_failed__);
+		fprintf(stderr, "%s", __edsa_stack_init_stack_malloc_failed__);
 		return NULL;
 	}
 
@@ -31,7 +31,7 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 
 	//if malloc fails
 	if(temp_stack_store == NULL){
-		fprintf(stderr, "%s", __edsa_stack_stack_data_malloc_failed__);
+		fprintf(stderr, "%s", __edsa_stack_init_stack_data_malloc_failed__);
 		free(temp_data);
 
 		return NULL;
