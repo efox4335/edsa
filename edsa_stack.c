@@ -57,11 +57,21 @@ void edsa_stack_push_unsafe(edsa_stack *stack, void *element)
 	return;
 }
 
+//adds element to stack with checking bounds
+//retuns 1 on success
+size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 {
-	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+	if(edsa_stack_available_elements(stack) > 0){
+		memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
 
-	return;
+		return 1;
+	}
+
+	fprintf(stderr, "edsa_stack_push_safe: attempted to push to stack without space\n");
+
+	return 0;
 }
+
 //returns the number of elements that could be added with the current unused space
 size_t edsa_stack_available_elements(edsa_stack *stack)
 {

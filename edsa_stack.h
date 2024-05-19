@@ -25,4 +25,6 @@ size_t edsa_stack_size(edsa_stack *stack);
 
 size_t edsa_stack_available_elements(edsa_stack *stack);
 
+size_t edsa_stack_push_safe(edsa_stack *stack, void *element);
+
 #endif
