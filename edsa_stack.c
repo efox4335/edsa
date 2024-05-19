@@ -43,6 +43,8 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 
 	temp_stack_store->data_size = type_size;
 
+	temp_stack_store->stack_size = element_number;
+
 	return temp_stack_store;
 }
 

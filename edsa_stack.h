@@ -8,6 +8,8 @@ typedef struct{
 
 	size_t data_size;//size of each element stored
 
+	size_t stack_size;//number of elements allocated for the stack
+
 	void *elements;//pointer to the element stack
 }edsa_stack;
 
