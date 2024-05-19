@@ -57,6 +57,12 @@ void edsa_stack_free(edsa_stack *stack)
 	return;
 }
 
+//returns the size of the stack
+size_t edsa_stack_size(edsa_stack *stack)
+{
+	return stack->stack_size;
+}
+
 //returns the number of elements currently on the stack
 size_t edsa_stack_place(edsa_stack *stack)
 {
