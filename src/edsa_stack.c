@@ -3,16 +3,24 @@
 #include "edsa_stack.h"
 #include "edsa_error_codes.h"
 
+static size_t get_data_size(edsa_stack *stack);
+
 //returns the address of the top of the stack
 static void *current_place_address(edsa_stack *stack)
 {
-	return stack->elements + ((stack->stack_place - 1) * stack->data_size);
+	return stack->elements + ((stack->stack_place - 1) * get_data_size(stack));
 }
 
 //returns the address of the empty space above the top of the stack
 static void *next_place_address(edsa_stack *stack)
 {
-	return stack->elements + (stack->stack_place * stack->data_size);
+	return stack->elements + (stack->stack_place * get_data_size(stack));
+}
+
+//returns the size of the data type on the stack
+static size_t get_data_size(edsa_stack *stack)
+{
+	return stack->data_size;
 }
 
 //initializes stack returns NULL on error
@@ -62,7 +70,7 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **sta
 //pops value from the top of the stack without checking if the stack is empty
 size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
 {
-	memcpy(element, current_place_address(stack), stack->data_size);
+	memcpy(element, current_place_address(stack), get_data_size(stack));
 
 	stack->stack_place -= 1;
 
@@ -77,7 +85,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 	edsa_stack_place(stack, &stack_place);
 
 	if(stack_place > 0){
-		memcpy(element, current_place_address(stack), stack->data_size);
+		memcpy(element, current_place_address(stack), get_data_size(stack));
 
 		stack->stack_place -= 1;
 
@@ -90,7 +98,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 //adds element to stack without checking bounds
 size_t edsa_stack_push_unsafe(edsa_stack *stack, void *element)
 {
-	memcpy(next_place_address(stack), element, stack->data_size);
+	memcpy(next_place_address(stack), element, get_data_size(stack));
 
 	stack->stack_place += 1;
 
@@ -105,7 +113,7 @@ size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 	edsa_stack_available_elements(stack, &elements_left);
 
 	if(elements_left > 0){
-		memcpy(next_place_address(stack), element, stack->data_size);
+		memcpy(next_place_address(stack), element, get_data_size(stack));
 
 		stack->stack_place += 1;
 
