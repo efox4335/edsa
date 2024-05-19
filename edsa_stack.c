@@ -50,7 +50,13 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 }
 
 //adds element to stack without checking bounds
-void edsa_stack_put_unsafe(edsa_stack *stack, void *element)
+void edsa_stack_push_unsafe(edsa_stack *stack, void *element)
+{
+	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+
+	return;
+}
+
 {
 	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
 
