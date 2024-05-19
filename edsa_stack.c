@@ -56,6 +56,11 @@ void edsa_stack_put_unsafe(edsa_stack *stack, void *element)
 
 	return;
 }
+//returns the number of elements that could be added with the current unused space
+size_t edsa_stack_available_elements(edsa_stack *stack)
+{
+	return stack->stack_size - stack->stack_place;
+}
 
 //frees stack
 void edsa_stack_free(edsa_stack *stack)
