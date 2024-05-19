@@ -2,6 +2,11 @@
 #include <string.h>
 #include "edsa_stack.h"
 
+static void *current_place_address(edsa_stack *stack)
+{
+	return stack->elements + ((stack->stack_place - 1) * stack->data_size);
+}
+
 //initializes stack returns NULL on error
 size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **stack)
 {
@@ -49,7 +54,7 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **sta
 //pops value from the top of the stack without checking if the stack is empty
 size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
 {
-	memcpy(element, stack->elements + ((stack->stack_place - 1) * stack->data_size), stack->data_size);
+	memcpy(element, current_place_address(stack), stack->data_size);
 
 	stack->stack_place -= 1;
 
@@ -64,7 +69,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 	edsa_stack_place(stack, &stack_place);
 
 	if(stack_place > 0){
-		memcpy(element, stack->elements + ((stack->stack_place - 1) * stack->data_size), stack->data_size);
+		memcpy(element, current_place_address(stack), stack->data_size);
 
 		stack->stack_place -= 1;
 
