@@ -3,11 +3,13 @@
 #include "edsa_stack.h"
 #include "edsa_error_codes.h"
 
+//returns the address of the top of the stack
 static void *current_place_address(edsa_stack *stack)
 {
 	return stack->elements + ((stack->stack_place - 1) * stack->data_size);
 }
 
+//returns the address of the empty space above the top of the stack
 static void *next_place_address(edsa_stack *stack)
 {
 	return stack->elements + (stack->stack_place * stack->data_size);
