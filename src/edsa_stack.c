@@ -7,6 +7,11 @@ static void *current_place_address(edsa_stack *stack)
 	return stack->elements + ((stack->stack_place - 1) * stack->data_size);
 }
 
+static void *next_place_address(edsa_stack *stack)
+{
+	return stack->elements + (stack->stack_place * stack->data_size);
+}
+
 //initializes stack returns NULL on error
 size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **stack)
 {
@@ -82,7 +87,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 //adds element to stack without checking bounds
 size_t edsa_stack_push_unsafe(edsa_stack *stack, void *element)
 {
-	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+	memcpy(next_place_address(stack), element, stack->data_size);
 
 	stack->stack_place += 1;
 
@@ -97,7 +102,7 @@ size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 	edsa_stack_available_elements(stack, &elements_left);
 
 	if(elements_left > 0){
-		memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+		memcpy(next_place_address(stack), element, stack->data_size);
 
 		stack->stack_place += 1;
 
