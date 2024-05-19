@@ -4,6 +4,8 @@
 #include "edsa_error_codes.h"
 
 static size_t get_data_size(edsa_stack *stack);
+static void *current_place_address(edsa_stack *stack);
+static void *next_place_address(edsa_stack *stack);
 
 //returns the address of the top of the stack
 static void *current_place_address(edsa_stack *stack)
