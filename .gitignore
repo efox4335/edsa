@@ -3,4 +3,5 @@
 !*.h
 !makefile
 !src
+!tests
 test.c
