@@ -19,4 +19,8 @@ void edsa_stack_free(edsa_stack *stack);
 
 size_t edsa_stack_place(edsa_stack *stack);
 
+void edsa_stack_put_unsafe(edsa_stack *stack, void *element);
+
+size_t edsa_stack_size(edsa_stack *stack);
+
 #endif
