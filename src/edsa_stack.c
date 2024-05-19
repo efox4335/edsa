@@ -6,23 +6,30 @@
 static size_t get_data_size(edsa_stack *stack);
 static void *current_place_address(edsa_stack *stack);
 static void *next_place_address(edsa_stack *stack);
+static void *get_stack_pointer(edsa_stack *stack);
 
 //returns the address of the top of the stack
 static void *current_place_address(edsa_stack *stack)
 {
-	return stack->elements + ((stack->stack_place - 1) * get_data_size(stack));
+	return get_stack_pointer(stack) + ((stack->stack_place - 1) * get_data_size(stack));
 }
 
 //returns the address of the empty space above the top of the stack
 static void *next_place_address(edsa_stack *stack)
 {
-	return stack->elements + (stack->stack_place * get_data_size(stack));
+	return get_stack_pointer(stack) + (stack->stack_place * get_data_size(stack));
 }
 
 //returns the size of the data type on the stack
 static size_t get_data_size(edsa_stack *stack)
 {
 	return stack->data_size;
+}
+
+//returns base pointer to stack
+static void *get_stack_pointer(edsa_stack *stack)
+{
+	return stack->elements;
 }
 
 //initializes stack returns NULL on error
@@ -136,7 +143,7 @@ size_t edsa_stack_available_elements(edsa_stack *stack, size_t *value)
 //frees stack
 size_t edsa_stack_free(edsa_stack *stack)
 {
-	free(stack->elements);
+	free(get_stack_pointer(stack));
 	free(stack);
 
 	return EDSA_SUCCESS;
