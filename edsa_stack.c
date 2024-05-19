@@ -49,7 +49,7 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **sta
 //pops value from the top of the stack without checking if the stack is empty
 size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
 {
-	memcpy(element, stack->elements + (stack->stack_place * stack->data_size), stack->data_size);
+	memcpy(element, stack->elements + ((stack->stack_place - 1) * stack->data_size), stack->data_size);
 
 	stack->stack_place -= 1;
 
@@ -64,7 +64,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 	edsa_stack_place(stack, &stack_place);
 
 	if(stack_place > 0){
-		memcpy(element, stack->elements + (stack->stack_place * stack->data_size), stack->data_size);
+		memcpy(element, stack->elements + ((stack->stack_place - 1) * stack->data_size), stack->data_size);
 
 		stack->stack_place -= 1;
 
