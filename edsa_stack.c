@@ -51,6 +51,8 @@ size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
 {
 	memcpy(element, stack->elements + (stack->stack_place * stack->data_size), stack->data_size);
 
+	stack->stack_place -= 1;
+
 	return EDSA_STACK_SUCCESS;
 }
 
@@ -64,6 +66,8 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 	if(stack_place > 0){
 		memcpy(element, stack->elements + (stack->stack_place * stack->data_size), stack->data_size);
 
+		stack->stack_place -= 1;
+
 		return EDSA_STACK_SUCCESS;
 	}
 
@@ -74,6 +78,8 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 size_t edsa_stack_push_unsafe(edsa_stack *stack, void *element)
 {
 	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+
+	stack->stack_place += 1;
 
 	return EDSA_STACK_SUCCESS;
 }
@@ -87,6 +93,8 @@ size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 
 	if(elements_left > 0){
 		memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+
+		stack->stack_place += 1;
 
 		return EDSA_STACK_SUCCESS;
 	}
