@@ -27,6 +27,8 @@ size_t edsa_stack_size(edsa_stack *stack, size_t *value);
 
 size_t edsa_stack_place(edsa_stack *stack, size_t *value);
 
+size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element);
+
 enum __edsa_stack_error_codes__{
 	EDSA_STACK_SUCCESS,//sucess
 	EDSA_STACK_INIT_ZERO_ALLOC_SIZE,//stack of zero size allocation attempted
