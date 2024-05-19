@@ -31,14 +31,4 @@ size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element);
 
 size_t edsa_stack_pop_safe(edsa_stack *stack, void *element);
 
-enum __edsa_stack_error_codes__{
-	EDSA_STACK_SUCCESS,//sucess
-	EDSA_STACK_INIT_ZERO_ALLOC_SIZE,//stack of zero size allocation attempted
-	EDSA_STACK_INIT_STACK_SIZE_MULTIPLICATION_OVERFLOW,//stack size multiplication overflowed
-	EDSA_STACK_INIT_STACK_MALLOC_FAILED,//stack malloc failed
-	EDSA_STACK_INIT_STACK_METADATA_MALLOC_FAILED,//stack metadata malloc failed
-	EDSA_STACK_PUSH_SAFE_STACK_FULL,//attempted to push to full stack
-	EDSA_STACK_POP_SAFE_STACK_EMPTY//attempted to pop empty stack
-};
-
 #endif

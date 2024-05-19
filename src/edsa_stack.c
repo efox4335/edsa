@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "edsa_stack.h"
+#include "edsa_error_codes.h"
 
 static void *current_place_address(edsa_stack *stack)
 {
@@ -53,7 +54,7 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **sta
 
 	*stack = temp_stack_store;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //pops value from the top of the stack without checking if the stack is empty
@@ -63,7 +64,7 @@ size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
 
 	stack->stack_place -= 1;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //pops value from the top of the stack without checking if the stack is empty
@@ -78,7 +79,7 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 
 		stack->stack_place -= 1;
 
-		return EDSA_STACK_SUCCESS;
+		return EDSA_SUCCESS;
 	}
 
 	return EDSA_STACK_POP_SAFE_STACK_EMPTY;
@@ -91,7 +92,7 @@ size_t edsa_stack_push_unsafe(edsa_stack *stack, void *element)
 
 	stack->stack_place += 1;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //adds element to stack with checking bounds
@@ -106,7 +107,7 @@ size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 
 		stack->stack_place += 1;
 
-		return EDSA_STACK_SUCCESS;
+		return EDSA_SUCCESS;
 	}
 
 	return EDSA_STACK_PUSH_SAFE_STACK_FULL;
@@ -117,7 +118,7 @@ size_t edsa_stack_available_elements(edsa_stack *stack, size_t *value)
 {
 	*value = stack->stack_size - stack->stack_place;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //frees stack
@@ -126,7 +127,7 @@ size_t edsa_stack_free(edsa_stack *stack)
 	free(stack->elements);
 	free(stack);
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //returns the size of the stack
@@ -134,7 +135,7 @@ size_t edsa_stack_size(edsa_stack *stack, size_t *value)
 {
 	*value = stack->stack_size;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS;
 }
 
 //returns the number of elements currently on the stack
@@ -142,5 +143,5 @@ size_t edsa_stack_place(edsa_stack *stack, size_t *value)
 {
 	*value = stack->stack_place;
 
-	return EDSA_STACK_SUCCESS;
+	return EDSA_SUCCESS	;
 }
