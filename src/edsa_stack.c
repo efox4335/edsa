@@ -143,5 +143,5 @@ size_t edsa_stack_place(edsa_stack *stack, size_t *value)
 {
 	*value = stack->stack_place;
 
-	return EDSA_SUCCESS	;
+	return EDSA_SUCCESS;
 }
