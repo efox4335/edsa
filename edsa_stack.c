@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "edsa_stack.h"
 
 //initializes stack returns NULL on error
@@ -46,6 +47,14 @@ edsa_stack *edsa_stack_init(size_t type_size, size_t element_number)
 	temp_stack_store->stack_size = element_number;
 
 	return temp_stack_store;
+}
+
+//adds element to stack without checking bounds
+void edsa_stack_put_unsafe(edsa_stack *stack, void *element)
+{
+	memcpy(stack->elements + (stack->stack_place * stack->data_size), element, stack->data_size);
+
+	return;
 }
 
 //frees stack
