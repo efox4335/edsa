@@ -3,5 +3,6 @@
 !*.h
 !makefile
 !src**/*
-!tests
+!tests**/*
+!CMakeLists.txt
 test.c
