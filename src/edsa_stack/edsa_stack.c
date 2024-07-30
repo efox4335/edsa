@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "edsa_stack.h"
-#include "edsa_error_codes.h"
+#include "../edsa_error_codes/edsa_error_codes.h"
 
 static size_t get_data_size(edsa_stack *stack);
 static void *current_place_address(edsa_stack *stack);
