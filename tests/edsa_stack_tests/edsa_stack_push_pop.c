@@ -1,4 +1,4 @@
-#include "../../src/edsa_stack/edsa_stack.h"
+#include "../../src/edsa.h"
 #include <stdlib.h>
 #include <time.h>
 
