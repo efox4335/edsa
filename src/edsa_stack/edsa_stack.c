@@ -11,13 +11,13 @@ static void *get_stack_pointer(edsa_stack *stack);
 //returns the address of the top of the stack
 static void *current_place_address(edsa_stack *stack)
 {
-	return get_stack_pointer(stack) + ((stack->stack_place - 1) * get_data_size(stack));
+	return (char *) get_stack_pointer(stack) + ((stack->stack_place - 1) * get_data_size(stack));
 }
 
 //returns the address of the empty space above the top of the stack
 static void *next_place_address(edsa_stack *stack)
 {
-	return get_stack_pointer(stack) + (stack->stack_place * get_data_size(stack));
+	return  (char *) get_stack_pointer(stack) + (stack->stack_place * get_data_size(stack));
 }
 
 //returns the size of the data type on the stack
