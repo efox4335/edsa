@@ -1,13 +1,18 @@
 cmake_minimum_required(VERSION 3.29.3)
 
-add_executable(edsa_stack_push_pop edsa_stack_push_pop.c)
+add_executable(edsa_stack_push_pop_static edsa_stack_push_pop.c)
+target_link_libraries(edsa_stack_push_pop_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_stack_push_pop_static COMMAND edsa_stack_push_pop_static)
 
-add_executable(edsa_stack_underflow edsa_stack_underflow.c)
+add_executable(edsa_stack_push_pop_shared edsa_stack_push_pop.c)
+target_link_libraries(edsa_stack_push_pop_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_push_pop_shared COMMAND edsa_stack_push_pop_shared)
 
-target_link_libraries(edsa_stack_push_pop ${CMAKE_PROJECT_NAME}_static)
 
-target_link_libraries(edsa_stack_underflow ${CMAKE_PROJECT_NAME}_static)
+add_executable(edsa_stack_underflow_static edsa_stack_underflow.c)
+target_link_libraries(edsa_stack_underflow_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_stack_underflow_static COMMAND edsa_stack_underflow_static)
 
-add_test(NAME edsa_stack_push_pop COMMAND edsa_stack_push_pop)
-
-add_test(NAME edsa_stack_underflow COMMAND edsa_stack_underflow)
+add_executable(edsa_stack_underflow_shared edsa_stack_underflow.c)
+target_link_libraries(edsa_stack_underflow_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_underflow_shared COMMAND edsa_stack_underflow_shared)
