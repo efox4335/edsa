@@ -19,5 +19,7 @@ int main(void)
 
 	edsa_stack_pop(stack, &check);
 
+	edsa_stack_free(stack);
+
 	return !(check == element);
 }
