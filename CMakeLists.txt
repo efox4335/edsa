@@ -7,4 +7,8 @@ add_library(${CMAKE_PROJECT_NAME}_shared SHARED)
 
 add_subdirectory(src)
 
+enable_testing()
+
+add_subdirectory(tests)
+
 include(CTest)
