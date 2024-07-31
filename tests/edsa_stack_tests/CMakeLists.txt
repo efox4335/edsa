@@ -16,3 +16,12 @@ add_test(NAME edsa_stack_underflow_static COMMAND edsa_stack_underflow_static)
 add_executable(edsa_stack_underflow_shared edsa_stack_underflow.c)
 target_link_libraries(edsa_stack_underflow_shared ${CMAKE_PROJECT_NAME}_shared)
 add_test(NAME edsa_stack_underflow_shared COMMAND edsa_stack_underflow_shared)
+
+
+add_executable(edsa_stack_overflow_static edsa_stack_overflow.c)
+target_link_libraries(edsa_stack_overflow_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_stack_overflow_static COMMAND edsa_stack_overflow_static)
+
+add_executable(edsa_stack_overflow_shared edsa_stack_overflow.c)
+target_link_libraries(edsa_stack_overflow_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_overflow_shared COMMAND edsa_stack_overflow_shared)
