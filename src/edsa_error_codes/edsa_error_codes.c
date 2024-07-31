@@ -21,11 +21,11 @@ size_t edsa_print_error(FILE *file, size_t error)
 		case EDSA_STACK_INIT_ZERO_ALLOC_SIZE:
 			fprintf(file, "edsa_stack_init: stack of zero size allocation attempted\n");
 			break;
-		case EDSA_STACK_POP_SAFE_STACK_EMPTY:
-			fprintf(file, "edsa_stack_pop_safe: attempted to pop from empty stack\n");
+		case EDSA_STACK_POP_STACK_EMPTY:
+			fprintf(file, "edsa_stack_pop: attempted to pop from empty stack\n");
 			break;
-		case EDSA_STACK_PUSH_SAFE_STACK_FULL:
-			fprintf(file, "edsa_stack_push_safe: attempted to push to full stack\n");
+		case EDSA_STACK_PUSH_STACK_FULL:
+			fprintf(file, "edsa_stack_push: attempted to push to full stack\n");
 			break;
 		default:
 			fprintf(file, "unknown error\n");

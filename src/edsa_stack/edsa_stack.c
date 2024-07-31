@@ -76,18 +76,8 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **sta
 	return EDSA_SUCCESS;
 }
 
-//pops value from the top of the stack without checking if the stack is empty
-size_t edsa_stack_pop_unsafe(edsa_stack *stack, void *element)
-{
-	memcpy(element, current_place_address(stack), get_data_size(stack));
-
-	stack->stack_place -= 1;
-
-	return EDSA_SUCCESS;
-}
-
-//pops value from the top of the stack without checking if the stack is empty
-size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
+//pops value from the top of the stack with checking if the stack is empty
+size_t edsa_stack_pop(edsa_stack *stack, void *element)
 {
 	size_t stack_place;
 
@@ -101,21 +91,11 @@ size_t edsa_stack_pop_safe(edsa_stack *stack, void *element)
 		return EDSA_SUCCESS;
 	}
 
-	return EDSA_STACK_POP_SAFE_STACK_EMPTY;
-}
-
-//adds element to stack without checking bounds
-size_t edsa_stack_push_unsafe(edsa_stack *stack, void *element)
-{
-	memcpy(next_place_address(stack), element, get_data_size(stack));
-
-	stack->stack_place += 1;
-
-	return EDSA_SUCCESS;
+	return EDSA_STACK_POP_STACK_EMPTY;
 }
 
 //adds element to stack with checking bounds
-size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
+size_t edsa_stack_push(edsa_stack *stack, void *element)
 {
 	size_t elements_left;
 
@@ -129,7 +109,7 @@ size_t edsa_stack_push_safe(edsa_stack *stack, void *element)
 		return EDSA_SUCCESS;
 	}
 
-	return EDSA_STACK_PUSH_SAFE_STACK_FULL;
+	return EDSA_STACK_PUSH_STACK_FULL;
 }
 
 //returns the number of elements that could be added with the current unused space
