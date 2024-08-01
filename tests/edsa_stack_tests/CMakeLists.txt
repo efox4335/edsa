@@ -34,3 +34,12 @@ add_test(NAME edsa_stack_push_static COMMAND edsa_stack_push_static)
 add_executable(edsa_stack_push_shared edsa_stack_push.c)
 target_link_libraries(edsa_stack_push_shared ${CMAKE_PROJECT_NAME}_shared)
 add_test(NAME edsa_stack_push_shared COMMAND edsa_stack_push_shared)
+
+
+add_executable(edsa_stack_pop_static edsa_stack_pop.c)
+target_link_libraries(edsa_stack_pop_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_stack_pop_static COMMAND edsa_stack_pop_static)
+
+add_executable(edsa_stack_pop_shared edsa_stack_pop.c)
+target_link_libraries(edsa_stack_pop_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_pop_shared COMMAND edsa_stack_pop_shared)
