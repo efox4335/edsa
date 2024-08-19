@@ -13,7 +13,7 @@ size_t edsa_print_error(FILE *file, size_t error)
 			fprintf(file, "edsa_stack_init: malloc failed on stack allocation\n");
 			break;
 		case EDSA_STACK_INIT_STACK_METADATA_MALLOC_FAILED:
-			fprintf(file, "edsa_stack_init: malloc failed on stack metadatas allocation\n");
+			fprintf(file, "edsa_stack_init: malloc failed on stack metadata allocation\n");
 			break;
 		case EDSA_STACK_INIT_STACK_SIZE_MULTIPLICATION_OVERFLOW:
 			fprintf(file, "edsa_stack_init: multiplaication on calculating stack size overflowed\n");
