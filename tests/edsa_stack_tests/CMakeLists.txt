@@ -43,3 +43,12 @@ add_test(NAME edsa_stack_pop_static COMMAND edsa_stack_pop_static)
 add_executable(edsa_stack_pop_shared edsa_stack_pop.c)
 target_link_libraries(edsa_stack_pop_shared ${CMAKE_PROJECT_NAME}_shared)
 add_test(NAME edsa_stack_pop_shared COMMAND edsa_stack_pop_shared)
+
+
+add_executable(edsa_stack_basic_func_static edsa_stack_basic_func.c)
+target_link_libraries(edsa_stack_basic_func_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_stack_basic_func_static COMMAND edsa_stack_basic_func_static)
+
+add_executable(edsa_stack_basic_func_shared edsa_stack_basic_func.c)
+target_link_libraries(edsa_stack_basic_func_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_basic_func_shared COMMAND edsa_stack_basic_func_shared)
