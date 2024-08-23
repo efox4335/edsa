@@ -5,6 +5,7 @@
 #define __edsa_error_codes__
 
 size_t edsa_print_error(FILE *file, size_t error);
+size_t edsa_get_error_string(size_t error, char **str);
 
 enum __edsa_error_codes__{
 	EDSA_SUCCESS,//sucess
