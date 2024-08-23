@@ -13,7 +13,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_init failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_init failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -22,7 +22,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_push failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_push failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -31,7 +31,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_pop failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_pop failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -40,7 +40,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_available_elements failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_available_elements failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -49,7 +49,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_size failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_size failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -58,7 +58,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_place failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_place failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
@@ -67,7 +67,7 @@ int main(void)
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
-		printf("edsa_stack_free failed to return %s instead returned %s\n",
+		printf("edsa_stack_basic_func.c: edsa_stack_free failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		return 1;
 	}
