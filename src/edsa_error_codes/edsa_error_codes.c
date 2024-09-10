@@ -26,6 +26,9 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_STACK_PUSH_STACK_FULL:
 			*str = "EDSA_STACK_PUSH_STACK_FULL\n";
 			break;
+		case EDSA_STACK_REALLOC_FAILED:
+			*str = "EDSA_STACK_REALLOC_FAILED";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR\n";
 			break;
