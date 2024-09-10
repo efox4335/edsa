@@ -3,31 +3,31 @@
 #include "edsa_stack.h"
 #include "../edsa_error_codes/edsa_error_codes.h"
 
-static size_t get_data_size(edsa_stack *stack);
-static void *current_place_address(edsa_stack *stack);
-static void *next_place_address(edsa_stack *stack);
-static void *get_stack_pointer(edsa_stack *stack);
+static size_t get_data_size(const edsa_stack *const restrict stack);
+static void *current_place_address(const edsa_stack *const restrict stack);
+static void *next_place_address(const edsa_stack *const restrict stack);
+static void *get_stack_pointer(const edsa_stack *const restrict stack);
 
 //returns the address of the top of the stack
-static void *current_place_address(edsa_stack *stack)
+static void *current_place_address(const edsa_stack *const restrict stack)
 {
 	return (char *) get_stack_pointer(stack) + ((stack->stack_place - 1) * get_data_size(stack));
 }
 
 //returns the address of the empty space above the top of the stack
-static void *next_place_address(edsa_stack *stack)
+static void *next_place_address(const edsa_stack *const stack)
 {
 	return  (char *) get_stack_pointer(stack) + (stack->stack_place * get_data_size(stack));
 }
 
 //returns the size of the data type on the stack
-static size_t get_data_size(edsa_stack *stack)
+static size_t get_data_size(const edsa_stack *const stack)
 {
 	return stack->data_size;
 }
 
 //returns base pointer to stack
-static void *get_stack_pointer(edsa_stack *stack)
+static void *get_stack_pointer(const edsa_stack *const stack)
 {
 	return stack->elements;
 }
