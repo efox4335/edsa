@@ -33,7 +33,7 @@ static void *get_stack_pointer(edsa_stack *stack)
 }
 
 //initializes stack returns NULL on error
-size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **restrict stack)
+size_t edsa_stack_init(const size_t type_size, const size_t element_number, edsa_stack **const restrict stack)
 {
 	size_t alloc_size = type_size * element_number;
 
@@ -77,7 +77,7 @@ size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **res
 }
 
 //pops value from the top of the stack with checking if the stack is empty
-size_t edsa_stack_pop(edsa_stack *restrict stack, void *restrict element)
+size_t edsa_stack_pop(edsa_stack *const restrict stack, void *const restrict element)
 {
 	size_t stack_place;
 
@@ -95,7 +95,7 @@ size_t edsa_stack_pop(edsa_stack *restrict stack, void *restrict element)
 }
 
 //adds element to stack with checking bounds
-size_t edsa_stack_push(edsa_stack *restrict stack, void *restrict element)
+size_t edsa_stack_push(edsa_stack *const restrict stack, void *const restrict element)
 {
 	size_t elements_left;
 
@@ -113,7 +113,7 @@ size_t edsa_stack_push(edsa_stack *restrict stack, void *restrict element)
 }
 
 //returns the number of elements that could be added with the current unused space
-size_t edsa_stack_available_elements(edsa_stack *restrict stack, size_t *restrict value)
+size_t edsa_stack_available_elements(edsa_stack *const restrict stack, size_t *const restrict value)
 {
 	*value = stack->stack_size - stack->stack_place;
 
@@ -121,7 +121,7 @@ size_t edsa_stack_available_elements(edsa_stack *restrict stack, size_t *restric
 }
 
 //frees stack
-size_t edsa_stack_free(edsa_stack *restrict stack)
+size_t edsa_stack_free(edsa_stack *const restrict stack)
 {
 	free(get_stack_pointer(stack));
 	free(stack);
@@ -130,7 +130,7 @@ size_t edsa_stack_free(edsa_stack *restrict stack)
 }
 
 //returns the size of the stack
-size_t edsa_stack_size(edsa_stack *restrict stack, size_t *restrict value)
+size_t edsa_stack_size(edsa_stack *const restrict stack, size_t *const restrict value)
 {
 	*value = stack->stack_size;
 
@@ -138,7 +138,7 @@ size_t edsa_stack_size(edsa_stack *restrict stack, size_t *restrict value)
 }
 
 //returns the number of elements currently on the stack
-size_t edsa_stack_place(edsa_stack *restrict stack, size_t *restrict value)
+size_t edsa_stack_place(edsa_stack *const restrict stack, size_t *const restrict value)
 {
 	*value = stack->stack_place;
 

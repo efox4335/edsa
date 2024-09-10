@@ -13,18 +13,18 @@ typedef struct{
 	void *elements;//pointer to the element stack
 }edsa_stack;
 
-size_t edsa_stack_init(size_t type_size, size_t element_number, edsa_stack **restrict stack);
+size_t edsa_stack_init(const size_t type_size, const size_t element_number, edsa_stack **const restrict stack);
 
-size_t edsa_stack_push(edsa_stack *restrict stack, void *restrict element);
+size_t edsa_stack_push(edsa_stack *const restrict stack, void *const restrict element);
 
-size_t edsa_stack_available_elements(edsa_stack *restrict stack, size_t *restrict value);
+size_t edsa_stack_available_elements(edsa_stack *const restrict stack, size_t *const restrict value);
 
-size_t edsa_stack_free(edsa_stack *restrict stack);
+size_t edsa_stack_free(edsa_stack *const restrict stack);
 
-size_t edsa_stack_size(edsa_stack *restrict stack, size_t *restrict value);
+size_t edsa_stack_size(edsa_stack *const restrict stack, size_t *const restrict value);
 
-size_t edsa_stack_place(edsa_stack *restrict stack, size_t *restrict value);
+size_t edsa_stack_place(edsa_stack *const restrict stack, size_t *const restrict value);
 
-size_t edsa_stack_pop(edsa_stack *restrict stack, void *restrict element);
+size_t edsa_stack_pop(edsa_stack *const restrict stack, void *const restrict element);
 
 #endif
