@@ -63,6 +63,15 @@ int main(void)
 		return 1;
 	}
 
+	ret_value = edsa_stack_realloc(stack, 7);
+	if(ret_value != EDSA_SUCCESS){
+		edsa_get_error_string(ret_value, &fail_err);
+		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
+		printf("edsa_stack_basic_func.c: edsa_stack_realloc failed to return %s instead returned %s\n",
+		ret_str, fail_err);
+		return 1;
+	}
+
 	ret_value = edsa_stack_free(stack);
 	if(ret_value != EDSA_SUCCESS){
 		edsa_get_error_string(ret_value, &fail_err);

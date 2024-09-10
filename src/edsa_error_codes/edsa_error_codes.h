@@ -12,7 +12,8 @@ enum __edsa_error_codes__{
 	EDSA_STACK_INIT_STACK_MALLOC_FAILED,//stack malloc failed
 	EDSA_STACK_INIT_STACK_METADATA_MALLOC_FAILED,//stack metadata malloc failed
 	EDSA_STACK_PUSH_STACK_FULL,//attempted to push to full stack
-	EDSA_STACK_POP_STACK_EMPTY//attempted to pop empty stack
+	EDSA_STACK_POP_STACK_EMPTY,//attempted to pop empty stack
+	EDSA_STACK_REALLOC_FAILED//realloc failed
 };
 
 

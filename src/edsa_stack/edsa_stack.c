@@ -144,3 +144,19 @@ size_t edsa_stack_place(edsa_stack *const restrict stack, size_t *const restrict
 
 	return EDSA_SUCCESS;
 }
+
+//resizes stack
+size_t edsa_stack_realloc(edsa_stack *const restrict stack, const size_t new_size)
+{
+	void *temp;
+
+	temp = realloc(stack->elements, get_data_size(stack) * new_size);
+
+	if(temp == NULL){
+		return EDSA_STACK_REALLOC_FAILED;
+	}
+
+	stack->elements = temp;
+
+	return EDSA_SUCCESS;
+}
