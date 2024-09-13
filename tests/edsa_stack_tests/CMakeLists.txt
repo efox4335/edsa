@@ -26,3 +26,12 @@ add_test(NAME edsa_stack_basic_func_static COMMAND edsa_stack_basic_func_static)
 add_executable(edsa_stack_basic_func_shared edsa_stack_basic_func.c)
 target_link_libraries(edsa_stack_basic_func_shared ${CMAKE_PROJECT_NAME}_shared)
 add_test(NAME edsa_stack_basic_func_shared COMMAND edsa_stack_basic_func_shared)
+
+
+add_executable(edsa_stack_data_intgr_static edsa_stack_data_intgr.c)
+target_link_libraries(edsa_stack_data_intgr_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME eedsa_stack_data_intgr_static COMMAND edsa_stack_data_intgr_static)
+
+add_executable(edsa_stack_data_intgr_shared edsa_stack_data_intgr.c)
+target_link_libraries(edsa_stack_data_intgr_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_stack_data_intgr_shared COMMAND edsa_stack_data_intgr_shared)
