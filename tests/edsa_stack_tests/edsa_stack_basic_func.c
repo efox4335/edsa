@@ -1,6 +1,7 @@
 #include "../../src/edsa.h"
 #include <stdio.h>
 
+//test only if the return val correct
 int main(void)
 {
 	edsa_stack *stack;
