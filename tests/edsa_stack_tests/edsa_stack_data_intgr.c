@@ -9,6 +9,7 @@ void fill_arr(unsigned char *arr, int ele_num)
 	}
 }
 
+//returns 1 on fail
 int chk_data(unsigned char *arr, int ele_num)
 {
 	for(int i = 0; i < ele_num; ++i){
