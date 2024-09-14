@@ -53,7 +53,8 @@
 		{
 			"name": "release",
 			"displayName": "release",
-			"configurePreset": "release"
+			"configurePreset": "release",
+			"targets": ["edsa_shared", "edsa_static"]
 		},
 
 		{
