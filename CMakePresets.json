@@ -1,0 +1,121 @@
+{
+	"version": 6,
+
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 29,
+		"patch": 3
+	},
+
+	"configurePresets": [
+		{
+			"name": "nosan",
+			"displayName": "nosan",
+			"binaryDir": "${sourceDir}/builds",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE":"Debug",
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g"
+			}
+		},
+
+		{
+			"name": "adrsan",
+			"displayName": "adrsan",
+			"binaryDir": "${sourceDir}/builds",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE":"Debug",
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=address"
+			}
+		},
+
+		{
+			"name": "undefsan",
+			"displayName": "undefsan",
+			"binaryDir": "${sourceDir}/builds",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE":"Debug",
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=undefined"
+			}
+		},
+
+		{
+			"name": "release",
+			"displayName": "release",
+			"binaryDir": "${sourceDir}/builds",
+			"cacheVariables": {
+				"CMAKE_BUILD_TYPE":"Release",
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -O3"
+			}
+		}
+	],
+
+	"buildPresets": [
+		{
+			"name": "release",
+			"displayName": "release",
+			"configurePreset": "release"
+		},
+
+		{
+			"name": "nosan",
+			"hidden": true,
+			"configurePreset": "nosan"
+		},
+
+		{
+			"name": "adrsan",
+			"hidden": true,
+			"configurePreset": "adrsan"
+		},
+
+		{
+			"name": "undefsan",
+			"hidden": true,
+			"configurePreset": "undefsan"
+		},
+
+		{
+			"name": "test",
+			"displayName": "test",
+			"hidden": false,
+			"inherits": [
+				"nosan",
+				"adrsan",
+				"undefsan"
+			]
+		}
+	],
+
+	"testPresets": [
+		{
+			"name": "nosan",
+			"hidden": true,
+			"configurePreset": "nosan"
+		},
+
+		{
+			"name": "adrsan",
+			"hidden": true,
+			"configurePreset": "adrsan"
+		},
+
+		{
+			"name": "undefsan",
+			"hidden": true,
+			"configurePreset": "undefsan"
+		},
+
+		{
+			"name": "test",
+			"displayName": "test",
+			"hidden": false,
+			"inherits": [
+				"nosan",
+				"adrsan",
+				"undefsan"
+			],
+			"output": {"outputOnFailure": true},
+			"execution": {"noTestsAction": "error", "stopOnFailure": true}
+		}
+	]
+}
