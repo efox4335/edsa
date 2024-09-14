@@ -34,6 +34,8 @@ int main(void)
 
 	arr = malloc(ARR_SIZE * DATA_SIZE * DATA_RANGE);
 
+	char *fail_msg = NULL;
+
 	if(arr == NULL){
 		printf("edsa_stack_data_intgr.c: test data malloc failed");
 
@@ -46,6 +48,14 @@ int main(void)
 		for(int j = 0; j < TEST_AMMOUNT; ++j){
 
 		}
+	}
+
+	if(0){//print fail message and cleanup
+		test_fail:
+
+		printf("%s", fail_msg);
+
+		free(arr);
 	}
 
 	free(arr);
