@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void fill_arr(int *arr, int ele_num)
+void fill_arr(unsigned char *arr, int ele_num)
 {
 	for(int i = 0; i < ele_num; ++i){
 		arr[i] = i;
 	}
 }
 
-int chk_data(int *arr, int ele_num)
+int chk_data(unsigned char *arr, int ele_num)
 {
 	for(int i = 0; i < ele_num; ++i){
-		if(arr[i] != i){
+		if(arr[i] != (unsigned char) i){
 			return 1;
 		}
 	}
@@ -26,10 +26,10 @@ int main(void)
 		ARR_SIZE = 1000,
 		TEST_AMMOUNT = 1000,
 		DATA_RANGE = 20,
-		DATA_SIZE = sizeof(int)
+		DATA_SIZE = sizeof(unsigned char)//unsigned char because signed char casts are implementation defined
 	};
 
-	int *arr = NULL;
+	unsigned char *arr = NULL;
 
 	arr = malloc(ARR_SIZE * DATA_SIZE * DATA_RANGE);
 
