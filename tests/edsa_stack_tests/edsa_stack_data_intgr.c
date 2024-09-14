@@ -9,6 +9,17 @@ void fill_arr(int *arr, int ele_num)
 	}
 }
 
+int chk_data(int *arr, int ele_num)
+{
+	for(int i = 0; i < ele_num; ++i){
+		if(arr[i] != i){
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
 int main(void)
 {
 	enum{
@@ -19,34 +30,21 @@ int main(void)
 	};
 
 	int *arr = NULL;
-	int *temp = NULL;
 
-	arr = malloc(ARR_SIZE * DATA_SIZE);
+	arr = malloc(ARR_SIZE * DATA_SIZE * DATA_RANGE);
 
 	if(arr == NULL){
 		printf("edsa_stack_data_intgr.c: test data malloc failed");
 
-		exit(1);
+		return 1;
 	}
 
-	fill_arr(arr, ARR_SIZE);
+	fill_arr(arr, ARR_SIZE * DATA_RANGE);
 
-	for(int i = 2; i <= DATA_RANGE; ++i){//runs each data size TEST_AMMOUNT times
+	for(int i = 1; i <= DATA_RANGE; ++i){//runs each data size TEST_AMMOUNT times
 		for(int j = 0; j < TEST_AMMOUNT; ++j){
 
 		}
-
-		temp = realloc(arr, ARR_SIZE * i * DATA_SIZE);//avoid orphaned arr pointer
-
-		if(temp == NULL){
-			printf("edsa_stack_data_intgr.c: test data realloc failed");
-
-			exit(1);
-		}
-
-		arr = temp;
-
-		fill_arr(arr, ARR_SIZE * i);
 	}
 
 	free(arr);
