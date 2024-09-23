@@ -19,5 +19,4 @@ size_t edsa_stack_place(edsa_stack *const restrict stack, size_t *const restrict
 size_t edsa_stack_pop(edsa_stack *const restrict stack, void *const restrict element);
 size_t edsa_stack_realloc(edsa_stack *const restrict stack, const size_t new_size);
 
-
 #endif
