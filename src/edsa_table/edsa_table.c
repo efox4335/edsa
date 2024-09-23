@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include "edsa_table.h"
 
 //fnv-1a hash
 static size_t hash(unsigned char *restrict key, const size_t len)
