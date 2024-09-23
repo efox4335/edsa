@@ -1,5 +1,5 @@
-#ifndef __edsa_hash_table__
-#define __edsa_hash_table__
+#ifndef __edsa_table__
+#define __edsa_table__
 
 typedef struct{
 	size_t ele_count;
