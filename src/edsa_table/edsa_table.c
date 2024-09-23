@@ -15,6 +15,7 @@ static size_t hash(unsigned char *restrict key, const size_t len)
 }
 
 //todo add arr of large primes and improve alg
+//todo check output matches list of primes
 static size_t next_largest_prime(size_t num)
 {
 	size_t pos_prime = num;
