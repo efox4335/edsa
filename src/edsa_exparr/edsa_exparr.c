@@ -1,0 +1,4 @@
+/*
+all structers will call these arrays then profiling with determine if they need to manage there
+own raw data
+*/
