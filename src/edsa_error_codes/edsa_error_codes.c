@@ -29,6 +29,15 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_STACK_REALLOC_FAILED:
 			*str = "EDSA_STACK_REALLOC_FAILED";
 			break;
+		case EDSA_EXPARR_INIT_MALLOC_FAILED:
+			*str = "EDSA_EXPARR_INIT_MALLOC_FAILED";
+			break;
+		case EDSA_EXPARR_INTI_ZERO_ALLOC_SIZE:
+			*str = "EDSA_EXPARR_INTI_ZERO_ALLOC_SIZE";
+			break;
+		case EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW:
+			*str = "EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
