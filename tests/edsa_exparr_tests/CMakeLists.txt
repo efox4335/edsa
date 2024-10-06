@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.29.3)
+
+
+add_executable(edsa_exparr_basic_func_static edsa_exparr_basic_func.c)
+target_link_libraries(edsa_exparr_basic_func_static ${CMAKE_PROJECT_NAME}_static)
+add_test(NAME edsa_exparr_basic_func_static COMMAND edsa_exparr_basic_func_static)
+
+add_executable(edsa_exparr_basic_func_shared edsa_exparr_basic_func.c)
+target_link_libraries(edsa_exparr_basic_func_shared ${CMAKE_PROJECT_NAME}_shared)
+add_test(NAME edsa_exparr_basic_func_shared COMMAND edsa_exparr_basic_func_shared)
