@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 //test only if the return val correct
+//fflush needed because print may not happen if address sanitizer detects leaks
 int main(void)
 {
 	edsa_exparr *arr;
@@ -17,6 +18,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_exparr_basic_func.c: edsa_exparr_init failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -27,6 +29,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_exparr_basic_func.c: edsa_exparr_free failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 

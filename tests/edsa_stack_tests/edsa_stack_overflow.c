@@ -1,6 +1,7 @@
 #include "../../src/edsa.h"
 #include <stdio.h>
 
+//fflush needed because print may not happen if address sanitizer detects leaks
 int main(void)
 {
 	edsa_stack *stack;
@@ -20,6 +21,7 @@ int main(void)
 		edsa_get_error_string(EDSA_STACK_PUSH_STACK_FULL, &ret_str);
 		printf("edsa_stack_overflow.c: edsa_stack_push failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 

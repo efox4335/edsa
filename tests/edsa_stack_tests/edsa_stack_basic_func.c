@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 //test only if the return val correct
+//fflush needed because print may not happen if address sanitizer detects leaks
 int main(void)
 {
 	edsa_stack *stack;
@@ -16,6 +17,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_init failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -25,6 +27,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_push failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -34,6 +37,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_pop failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -52,6 +56,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_size failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -61,6 +66,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_place failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -70,6 +76,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_realloc failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
@@ -79,6 +86,7 @@ int main(void)
 		edsa_get_error_string(EDSA_SUCCESS, &ret_str);
 		printf("edsa_stack_basic_func.c: edsa_stack_free failed to return %s instead returned %s\n",
 		ret_str, fail_err);
+		fflush(stdout);
 		return 1;
 	}
 
