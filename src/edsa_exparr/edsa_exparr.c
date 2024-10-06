@@ -37,3 +37,11 @@ size_t edsa_exparr_init(edsa_exparr *restrict *const restrict arr, const size_t 
 
 	return EDSA_SUCCESS;
 }
+
+size_t edsa_exparr_free(edsa_exparr *const restrict arr)
+{
+	free(arr->arr);
+	free(arr);
+
+	return EDSA_SUCCESS;
+}
