@@ -105,6 +105,17 @@ size_t edsa_exparr_ins(edsa_exparr *const restrict arr, size_t index, void *cons
 	return EDSA_SUCCESS;
 }
 
+size_t edsa_exparr_read(edsa_exparr *const restrict arr, size_t index, void *const restrict data)
+{
+	if(index >= arr->arr_size){
+		return EDSA_EXPARR_READ_INVALID_INDEX;
+	}
+
+	memcpy(data, ((char *) arr->arr) + index * arr->data_size, arr->data_size);
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_exparr_free(edsa_exparr *const restrict arr)
 {
 	free(arr->arr);

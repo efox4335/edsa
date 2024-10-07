@@ -44,6 +44,9 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_EXPARR_INS_REALLOC_FAIL:
 			*str = "EDSA_EXPARR_INS_REALLOC_FAIL";
 			break;
+		case EDSA_EXPARR_READ_INVALID_INDEX:
+			*str = "EDSA_EXPARR_READ_INVALID_INDEX";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
