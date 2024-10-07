@@ -72,6 +72,8 @@ size_t edsa_exparr_ins(edsa_exparr *const restrict arr, size_t index, void *cons
 			goto index_size;
 		}
 
+		arr->arr_size = arr_size_double;
+
 		goto size_found;
 
 		index_size://executes only if arr->arr_size * 2 is unsuitable
@@ -90,6 +92,8 @@ size_t edsa_exparr_ins(edsa_exparr *const restrict arr, size_t index, void *cons
 			if(new_arr == NULL){
 				return EDSA_EXPARR_INS_REALLOC_FAIL;
 			}
+
+			arr->arr_size = index_inc;
 
 		size_found:
 			arr->arr = new_arr;
