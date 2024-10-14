@@ -44,6 +44,8 @@ size_t edsa_exparr_init(edsa_exparr *restrict *const restrict arr, const size_t 
 //to avoid many successive calls to realloc
 //if 2 * arr->arr_size trys * arr->data_size is too large falls back on (index + 1) * arr->data_size
 //if both fail returns error
+//
+//handels case where arr->arr_size == 0
 size_t edsa_exparr_ins(edsa_exparr *const restrict arr, size_t index, void *const restrict data)
 {
 	if(index >= arr->arr_size){
