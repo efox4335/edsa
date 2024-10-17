@@ -3,7 +3,7 @@ A data structures and algorithms library written in c.
 ## Supported data structures/algorithms
 | Data structure/Algorithm | Description |
 | --- | --- |
-| exparr | An array that expands to fit data new elements added. Supports arbitrary typed and sized data. |
+| exparr | An array that expands to fit new elements added. Supports arbitrary typed and sized data. |
 ## Build and Installation Instructions
 ### Linux
 From the root of the project directory run this command.
