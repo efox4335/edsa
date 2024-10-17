@@ -14,15 +14,20 @@ Untested.
 ### Macos
 Untested.
 
+## Usage 
+Must include `edsa.h` in src directory. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from builds directory.
+
 ## exparr
 To use exparr a vairable of type `edsa_exparr *` will need to be created.
 
-###  `edsa_exparr_init()`
+### `edsa_exparr_init()`
 Initalizes an exparr data structure.
 
 Arguments:
  - First argument the address of the `edsa_exparr *` vairable.
- - Second argument the amount of elements you would like to be allocated cannot be 0.
+   - Must not have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+ - Second argument the amount of elements you would like to be allocated.
+   - Must be greater then 0.
  - Third argument the size of the data type given by `sizeof()`.
 
 Return values:
@@ -33,9 +38,104 @@ Return values:
  - `EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW`
    - Returns when `arr_size * data_size` overflows.
  - `EDSA_EXPARR_INIT_MALLOC_FAILED`
-   - Returns when `malloc()` fails does not need to be freed.
+   - Returns when `malloc()` fails does not need to be freed.  
 
 #### Example
 ```c
+size_t error_val;
+edsa_exparr *arr;
+
 error_val = edsa_exparr_init(&arr, 10, sizeof(char));
+```
+
+### `edsa_exparr_free()`
+Frees an exparr data structure.
+
+Argumens:
+ - First argument a pointer of type `edsa_exparr *`.
+   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+  
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+
+ #### Example
+ ```c
+size_t error_val;
+edsa_exparr *arr;
+
+...
+
+error_val = edsa_exparr_free(arr);
+```
+
+### `edsa_exparr_ins()`
+Inserts data into exparr at specified index.
+
+Arguments:
+ - First argument a pointer of type `edsa_exparr *`.
+   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+ - Second argument an index at which the data will be put.
+   - Array will expand in size if index is outside of array.
+ - Third argument a pointer to the data to be inserted.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_EXPARR_INS_INDEX_TO_HIGH`
+   - Returns if the index is to high for the array size to be stored.
+ - `EDSA_EXPARR_INS_REALLOC_FAIL`
+   - Returns if `realloc()` fails on the array.
+   - Still needs to be freed by `edsa_exparr_free()`.
+
+#### Example
+```c
+size_t error_val;
+edsa_exparr *arr;
+char c = 'c';
+
+...
+
+error_val = edsa_exparr_ins(arr, 1, &c);
+```
+
+### `edsa_exparr_read()`
+Reads data from exparr and stores at location pointed to by third argument.
+
+Arguments:
+ - First argument a pointer of type `edsa_exparr *`.
+   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+ - Second argument the index from which the data will be read.
+   - Does not check if that index has previously been written to.
+ - Third arugment a pointer to where the read data will be written.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_EXPARR_READ_INVALID_INDEX`
+   - Returns if a read it attempted at an index that is not allocated for that array.
+   - Does not check if data at index has been to written previously.
+  
+#### Example
+```c
+size_t error_val;
+edsa_exparr *arr;
+char c;
+
+...
+
+error_val = edsa_exparr_read(arr, 1, &c);
+```
+
+
+### Full exparr Example
+```c
+size_t error_val;
+edsa_exparr *arr;
+char c = 'c';
+
+error_val = edsa_exparr_init(&arr, 10, sizeof(char));
+error_val = edsa_exparr_ins(arr, 1, &c);
+error_val = edsa_exparr_read(arr, 1, &c);
+error_val = edsa_exparr_free(arr);
 ```
