@@ -6,6 +6,7 @@
 
 typedef struct{
 	size_t size;
+	size_t data_size;
 	edsa_exparr *heap;
 	int (*cmp_func)(const void *const, const void *const);
 }edsa_heap;
