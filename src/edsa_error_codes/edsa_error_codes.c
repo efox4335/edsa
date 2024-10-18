@@ -47,6 +47,15 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_EXPARR_READ_INVALID_INDEX:
 			*str = "EDSA_EXPARR_READ_INVALID_INDEX";
 			break;
+		case EDSA_HEAP_INIT_MALLOC_FAILED:
+			*str = "EDSA_HEAP_INIT_MALLOC_FAILED";
+			break;
+		case EDSA_HEAP_INIT_ZERO_ALLOC_SIZE:
+			*str = "EDSA_HEAP_INIT_ZERO_ALLOC_SIZE";
+			break;
+		case EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW:
+			*str = "EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;

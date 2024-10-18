@@ -4,17 +4,18 @@ A data structures and algorithms library written in c.
 | Data structure/Algorithm | Description |
 | --- | --- |
 | exparr | An array that expands to fit new elements added. Supports arbitrary typed and sized data. |
+| heap | A heap with a user supplied compare function. Expands to fit arbitrary typed and sized data. |
 ## Build and Installation Instructions
 ### Linux
 From the root of the project directory run this command.
 
 ```cmake -S . --preset=release && cmake --build --preset=release```
-### Windows 
+### Windows
 Untested.
 ### Macos
 Untested.
 
-## Usage 
+## Usage
 Must include `edsa.h` in `src/` directory. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `builds/` directory.
 
 ## exparr
@@ -38,7 +39,7 @@ Return values:
  - `EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW`
    - Returns when `arr_size * data_size` overflows.
  - `EDSA_EXPARR_INIT_MALLOC_FAILED`
-   - Returns when `malloc()` fails does not need to be freed.  
+   - Returns when `malloc()` fails does not need to be freed.
 
 #### Example
 ```c
@@ -54,13 +55,13 @@ Frees an exparr data structure.
 Argumens:
  - First argument a pointer of type `edsa_exparr *`.
    - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
-  
+
 Return values:
  - `EDSA_SUCCESS`
    - Returns upon successful run.
 
- #### Example
- ```c
+#### Example
+```c
 size_t error_val;
 edsa_exparr *arr;
 
@@ -115,7 +116,7 @@ Return values:
  - `EDSA_EXPARR_READ_INVALID_INDEX`
    - Returns if a read it attempted at an index that is not allocated for that array.
    - Does not check if data at index has been to written previously.
-  
+
 #### Example
 ```c
 size_t error_val;
@@ -138,4 +139,43 @@ error_val = edsa_exparr_init(&arr, 10, sizeof(char));
 error_val = edsa_exparr_ins(arr, 1, &c);
 error_val = edsa_exparr_read(arr, 1, &c);
 error_val = edsa_exparr_free(arr);
+```
+
+## heap
+To use a vairable of type `edsa_heap` will need to be created.
+
+### `edsa_heap_init()`
+Initalizes a heap data structure.
+
+Arguments:
+ - First argument the address of a pointer of type `edsa_heap`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+ - Second argument the amount of elements you would like to be allocated.
+   - Must be greater then `0`.
+ - Third argument the size of the data type given by `sizeof()`.
+ - Fourth argument is a function pointer to a user supplied function that returns type `int`, and takes two arguments of type `const void *const`. Function returns `1` if the element of the heap pointed to by the first argument should be higher up in the heap then the element pointed to by the second element. Returns `0` otherwise.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HEAP_INTI_ZERO_ALLOC_SIZE`
+   - Returns when `heap_size * data_size` equals 0.
+ - `EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW`
+   - Returns when `heap_size * data_size` overflows.
+ - `EDSA_HEAP_INIT_MALLOC_FAILED`
+   - Returns when `malloc()` fails does not need to be freed.
+
+#### Example
+```c
+int cmp_func(const void *const ele_1, const void *const ele_2)
+{
+  return ele_1 > ele_2
+}
+
+...
+
+edsa_heap *heap;
+size_t ret_val
+
+ret_val = edsa_heap_init(&heap, 10, sizeof(char), cmp_func);
 ```
