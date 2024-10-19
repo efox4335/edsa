@@ -1,19 +1,17 @@
 cmake_minimum_required(VERSION 3.29.3)
 
+set(test_sources
+	edsa_exparr_basic_func.c;
+	edsa_exparr_data_intgr.c)
 
-add_executable(edsa_exparr_basic_func_static edsa_exparr_basic_func.c)
-target_link_libraries(edsa_exparr_basic_func_static ${CMAKE_PROJECT_NAME}_static)
-add_test(NAME edsa_exparr_basic_func_static COMMAND edsa_exparr_basic_func_static)
+foreach(s_file IN LISTS test_sources)
+	string(REPLACE ".c" "" test_names ${s_file})
 
-add_executable(edsa_exparr_basic_func_shared edsa_exparr_basic_func.c)
-target_link_libraries(edsa_exparr_basic_func_shared ${CMAKE_PROJECT_NAME}_shared)
-add_test(NAME edsa_exparr_basic_func_shared COMMAND edsa_exparr_basic_func_shared)
+	add_executable(${test_names}_static ${s_file})
+	target_link_libraries(${test_names}_static ${CMAKE_PROJECT_NAME}_static)
+	add_test(NAME ${test_names}_static COMMAND ${test_names}_static)
 
-
-add_executable(edsa_exparr_data_intgr_static edsa_exparr_data_intgr.c)
-target_link_libraries(edsa_exparr_data_intgr_static ${CMAKE_PROJECT_NAME}_static)
-add_test(NAME edsa_exparr_data_intgr_static COMMAND edsa_exparr_data_intgr_static)
-
-add_executable(edsa_exparr_data_intgr_shared edsa_exparr_data_intgr.c)
-target_link_libraries(edsa_exparr_data_intgr_shared ${CMAKE_PROJECT_NAME}_shared)
-add_test(NAME edsa_exparr_data_intgr_shared COMMAND edsa_exparr_data_intgr_shared)
+	add_executable(${test_names}_shared ${s_file})
+	target_link_libraries(${test_names}_shared ${CMAKE_PROJECT_NAME}_shared)
+	add_test(NAME ${test_names}_shared COMMAND ${test_names}_shared)
+endforeach()
