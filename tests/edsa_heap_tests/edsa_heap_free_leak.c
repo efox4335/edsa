@@ -5,7 +5,7 @@ tests for memory leak by address sanitizer
 
 int cmp_func(const void *const a, const void *const b)
 {
-	return (char *) a > (char *) b;
+	return *((char *) a) > *((char *) b);
 }
 
 int main(void)
