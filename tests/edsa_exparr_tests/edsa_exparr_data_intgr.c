@@ -1,5 +1,5 @@
 //data is set to integers between 1 and ARR_SIZE
-#include "../../src/edsa.h"
+#include "edsa.h"
 #include <stdio.h>
 
 void set_arr(size_t *arr, size_t size)

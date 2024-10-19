@@ -1,4 +1,4 @@
-#include "../../src/edsa.h"
+#include "edsa.h"
 #include <stdio.h>
 
 //test only if the return val correct
