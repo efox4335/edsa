@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.29.3)
 
 set(test_sources
 	edsa_heap_free_leak.c;
-	edsa_heap_init_mul_overflow.c)
+	edsa_heap_init_mul_overflow.c;
+	edsa_heap_init_zero_alloc_size.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
