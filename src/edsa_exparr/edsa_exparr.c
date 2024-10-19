@@ -4,8 +4,7 @@ own raw data
 */
 #include <stdlib.h>
 #include <string.h>
-#include "edsa_exparr.h"
-#include "../edsa_error_codes/edsa_error_codes.h"
+#include "edsa.h"
 
 size_t edsa_exparr_init(edsa_exparr *restrict *const restrict arr, const size_t arr_size, const size_t data_size)
 {

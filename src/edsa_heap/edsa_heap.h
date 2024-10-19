@@ -2,7 +2,7 @@
 #define __edsa_heap__
 
 #include <stddef.h>
-#include "../edsa.h"
+#include "edsa.h"
 
 typedef struct{
 	size_t size;

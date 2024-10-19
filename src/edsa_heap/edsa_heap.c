@@ -4,7 +4,7 @@
  - cmp_func returns 1 when the element pointed to by first argument belongs above the second in the heap 0 otherwise
  - edsa_heap_build() should construct the heap bottom up
 */
-#include "../edsa.h"
+#include "edsa.h"
 #include "edsa_heap.h"
 #include <stddef.h>
 #include <stdlib.h>
