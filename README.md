@@ -169,7 +169,7 @@ Return values:
 ```c
 int cmp_func(const void *const ele_1, const void *const ele_2)
 {
-  return ele_1 > ele_2
+  return *((char *) ele_1) > *((char *) ele_2)
 }
 
 ...
