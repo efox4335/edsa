@@ -47,3 +47,11 @@ size_t edsa_heap_init(edsa_heap *restrict *const restrict heap, const size_t hea
 
 	return EDSA_SUCCESS;
 }
+
+size_t edsa_heap_free(edsa_heap *const restrict heap)
+{
+	edsa_exparr_free(heap->heap);
+	free(heap);
+
+	return EDSA_SUCCESS;
+}
