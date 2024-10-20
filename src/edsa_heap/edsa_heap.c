@@ -21,6 +21,11 @@ static inline size_t get_left_child(size_t index)
 	return ((index + 1) << 1) - 1;
 }
 
+static inline size_t get_right_child(size_t index)
+{
+	return (index + 1) << 1;
+}
+
 size_t edsa_heap_init(edsa_heap *restrict *const restrict heap, const size_t heap_size, const size_t data_size, int (*cmp_func)(const void *const, const void *const))
 {
 	edsa_heap *temp_heap = (edsa_heap *) malloc(sizeof(edsa_heap));
