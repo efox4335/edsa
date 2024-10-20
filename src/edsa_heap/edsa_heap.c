@@ -3,11 +3,18 @@
  - uses edsa_exparr to store the heap
  - cmp_func returns 1 when the element pointed to by first argument belongs above the second in the heap 0 otherwise
  - edsa_heap_build() should construct the heap bottom up
+ - index of parent of node at pos is ((pos + 1) / 2) - 1
+ - index of children of node at pos is ((pos + 1) * 2) - 1 and ((pos + 1) * 2)
 */
 #include "edsa.h"
 #include "edsa_heap.h"
 #include <stddef.h>
 #include <stdlib.h>
+
+static inline size_t get_parent_index(size_t index)
+{
+	return ((index + 1) >> 1) - 1;
+}
 
 size_t edsa_heap_init(edsa_heap *restrict *const restrict heap, const size_t heap_size, const size_t data_size, int (*cmp_func)(const void *const, const void *const))
 {
