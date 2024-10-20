@@ -139,6 +139,7 @@ Arguments:
  - Third arugment the address of a pointer that will be changed to point to an address that contains the data pointed to by the third argument of `edsa_exparr_ins()` with the same second argument.
    - Must be cast to type `(void **)`.
    - Data in the range from the value of the third argument to that value plus the data size given to `edsa_exparr_init()` can be read from and writted to.
+   - Must not pass as third argument to `edsa_exparr_ins()` with same second argument.
 
 Return values:
  - `EDSA_SUCCESS`
