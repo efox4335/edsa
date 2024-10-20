@@ -116,7 +116,7 @@ size_t edsa_heap_init(edsa_heap *restrict *const restrict heap, const size_t hea
 
 	temp_heap->cmp_func = cmp_func;
 	temp_heap->heap = temp_arr;
-	temp_heap->size = heap_size;
+	temp_heap->size = 0;
 	temp_heap->data_size = data_size;
 
 	*heap = temp_heap;
