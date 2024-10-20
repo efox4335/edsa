@@ -15,7 +15,8 @@
 //static functions that return error codes should only return these to avoid 2 errors having the same val
 enum{
 	SUCCESS,
-	UP_HEAP_MALLOC_FAIL
+	UP_HEAP_MALLOC_FAIL,
+	DOWN_HEAP_MALLOC_FAIL
 };
 
 static inline size_t get_parent_index(size_t index)
@@ -81,6 +82,76 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 	edsa_exparr_ins(heap->heap, child_index, ele_temp_store);
 
 	free(ele_temp_store);
+	return SUCCESS;
+}
+
+//moves node at index as far down as it can go
+static size_t down_heap(edsa_heap *heap, size_t index)
+{
+	size_t left_child_index = get_left_child(index);
+
+	//if index is already at the bottom of heap
+	if(left_child_index >= heap->size){
+		return SUCCESS;
+	}
+
+	size_t right_child_index;
+	size_t parent_index = index;
+	size_t largest_child_index;
+
+	void *left_child_ptr = NULL;
+	void *right_child_ptr = NULL;
+	void *parent_ptr = NULL;
+	void *largest_child_ptr = NULL;
+
+	edsa_exparr_get_ele_ptr(heap->heap, parent_index, (void **) &parent_ptr);
+
+	void *temp_parent_cashe = NULL;
+
+	temp_parent_cashe = malloc(heap->data_size);
+
+	if(temp_parent_cashe == NULL){
+		return DOWN_HEAP_MALLOC_FAIL;
+	}
+
+	edsa_exparr_read(heap->heap, index, temp_parent_cashe);
+
+	while(1){
+		left_child_index = get_left_child(parent_index);
+		right_child_index = get_right_child(parent_index);
+
+		//parent_index is already at bottom of heap
+		if(left_child_index >= heap->size){
+			break;
+		}else if(right_child_index >= heap->size){
+			edsa_exparr_get_ele_ptr(heap->heap, left_child_index, (void **) &largest_child_ptr);
+			largest_child_index = left_child_index;
+		}else{
+
+			edsa_exparr_get_ele_ptr(heap->heap, left_child_index, (void **) &left_child_ptr);
+			edsa_exparr_get_ele_ptr(heap->heap, right_child_index, (void **) &right_child_ptr);
+
+			if((*(heap->cmp_func))(left_child_ptr, right_child_ptr)){
+				largest_child_ptr = left_child_ptr;
+				largest_child_index = left_child_index;
+			}else{
+				largest_child_ptr = right_child_ptr;
+				largest_child_index = right_child_index;
+			}
+		}
+
+		if((*(heap->cmp_func))(largest_child_ptr, parent_ptr)){
+			edsa_exparr_ins(heap->heap, parent_index, largest_child_ptr);
+			parent_index = left_child_index;
+		}else{
+			break;
+		}
+	}
+
+	edsa_exparr_ins(heap->heap, parent_index, temp_parent_cashe);
+
+	free(temp_parent_cashe);
+
 	return SUCCESS;
 }
 
