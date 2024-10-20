@@ -75,7 +75,6 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 
 		parent_index = get_parent_index(child_index);
 
-		edsa_exparr_get_ele_ptr(heap->heap, child_index, (void **) &ele_ptr);
 		edsa_exparr_get_ele_ptr(heap->heap, parent_index, (void **) &parent_ptr);
 	}while((*(heap->cmp_func))(ele_ptr, parent_ptr));
 
