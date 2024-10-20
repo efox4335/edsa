@@ -83,6 +83,34 @@ int main(void)
 		return 1;
 	}
 
+	//test for edsa_exparr_get_ele_ptr()
+	size_t *data_ptr;
+
+	for(size_t i = 0; i < ARR_SIZE; ++i){
+		ret_val = edsa_exparr_get_ele_ptr(exparr, i, (void **) &(data_ptr));
+
+		//for checking it returned the right val
+		arr[i] = *data_ptr;
+
+		if(ret_val != EDSA_SUCCESS){
+			edsa_get_error_string(ret_val, &fail_err);
+			edsa_get_error_string(EDSA_SUCCESS, &ret_str);
+			printf("edsa_exparr_data_intgr.c: edsa_exparr_get_ele_ptr failed to return %s instead returned %s\n",
+			ret_str, fail_err);
+			fflush(stdout);
+			return 1;
+		}
+	}
+
+	fail_index = check_arr(arr, ARR_SIZE);
+
+	if(fail_index != ARR_SIZE){
+		printf("edsa_exparr_data_intgr.c: edsa_exparr_get_ele_ptr failed to pass back correct data at index %ld\n",
+		fail_index);
+		fflush(stdout);
+		return 1;
+	}
+
 	edsa_exparr_free(exparr);
 
 	return 0;
