@@ -18,7 +18,7 @@ foreach(s_file IN LISTS test_sources)
 	add_test(NAME ${test_names}_shared COMMAND ${test_names}_shared)
 endforeach()
 
-if(${LINUX})
+if(${LINUX} AND NOT ${ADRSAN})
 	add_executable(edsa_heap_init_malloc_fail_static edsa_heap_init_malloc_fail.c)
 	target_link_libraries(edsa_heap_init_malloc_fail_static ${CMAKE_PROJECT_NAME}_static)
 	add_test(NAME edsa_heap_init_malloc_fail_static COMMAND edsa_heap_init_malloc_fail_static)

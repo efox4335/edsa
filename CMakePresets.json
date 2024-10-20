@@ -14,7 +14,8 @@
 			"binaryDir": "${sourceDir}/builds",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE":"Debug",
-				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g"
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g",
+				"ADRSAN": "FALSE"
 			}
 		},
 
@@ -24,7 +25,8 @@
 			"binaryDir": "${sourceDir}/builds",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE":"Debug",
-				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=address"
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=address",
+				"ADRSAN": "TRUE"
 			}
 		},
 
@@ -34,7 +36,8 @@
 			"binaryDir": "${sourceDir}/builds",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE":"Debug",
-				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=undefined"
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -g -fsanitize=undefined",
+				"ADRSAN": "FALSE"
 			}
 		},
 
@@ -44,7 +47,8 @@
 			"binaryDir": "${sourceDir}/builds",
 			"cacheVariables": {
 				"CMAKE_BUILD_TYPE":"Release",
-				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -O3"
+				"CMAKE_C_FLAGS": "-Wextra -Wall -Wpedantic -O3",
+				"ADRSAN": "FALSE"
 			}
 		}
 	],
