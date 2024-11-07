@@ -16,6 +16,6 @@ size_t edsa_exparr_read(edsa_exparr *const restrict arr, size_t index, void *con
 size_t edsa_exparr_get_ele_ptr(edsa_exparr *const restrict arr, const size_t index, void **const restrict data_ptr);
 size_t edsa_exparr_batch_ins(edsa_exparr *const restrict arr, size_t index, void *const restrict data, size_t amount);
 size_t edsa_exparr_mov(edsa_exparr *const restrict arr, size_t src_index, size_t dest_index);
-
+size_t edsa_exparr_swap(edsa_exparr *const restrict arr, size_t fst_index, size_t snd_index);
 
 #endif
