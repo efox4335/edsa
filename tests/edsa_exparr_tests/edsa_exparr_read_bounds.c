@@ -24,5 +24,7 @@ int main(void)
 		return 1;
 	}
 
+	edsa_exparr_free(arr);
+
 	return 0;
 }
