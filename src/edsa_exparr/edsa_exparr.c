@@ -13,9 +13,9 @@ enum{
 	INDEX_TOO_LARGE
 };
 
-//new arr->arr_size is either twice the old val or index + 1 which ever is larger
+//new arr->arr_size is either twice the old val or size + 1 which ever is larger
 //to avoid many successive calls to realloc
-//if 2 * arr->arr_size * arr->data_size is too large falls back on (index + 1) * arr->data_size
+//if 2 * arr->arr_size * arr->data_size is too large falls back on (size + 1) * arr->data_size
 //if both fail returns error
 static size_t resize_array(edsa_exparr *const restrict arr, size_t size)
 {
