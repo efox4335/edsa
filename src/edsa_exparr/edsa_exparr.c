@@ -6,6 +6,73 @@ own raw data
 #include <string.h>
 #include "edsa.h"
 
+//error codes for static functions
+enum{
+	SUCCESS,
+	REALLOC_FAIL,
+	INDEX_TOO_LARGE
+};
+
+//new arr->arr_size is either twice the old val or index + 1 which ever is larger
+//to avoid many successive calls to realloc
+//if 2 * arr->arr_size * arr->data_size is too large falls back on (index + 1) * arr->data_size
+//if both fail returns error
+static size_t resize_array(edsa_exparr *const restrict arr, size_t size)
+{
+	size_t new_size;
+	const size_t arr_size_double = arr->arr_size * 2;
+	const size_t index_inc = size + 1;
+	void *new_arr = NULL;
+
+	if(size + 1 > arr->arr_size * 2){
+		goto index_size;
+	}
+
+	if(arr_size_double / 2 != arr->arr_size){
+		goto index_size;
+	}
+
+	new_size = arr_size_double * arr->data_size;
+
+	if(new_size / arr_size_double != arr->data_size){
+		goto index_size;
+	}
+
+	new_arr = realloc(arr->arr, new_size);
+
+	if(new_arr == NULL){
+		goto index_size;
+	}
+
+	arr->arr_size = arr_size_double;
+
+	goto size_found;
+
+	index_size://executes only if arr->arr_size * 2 is unsuitable
+		if(index_inc < size){
+			return INDEX_TOO_LARGE;
+		}
+
+		new_size = index_inc * arr->data_size;
+
+		if(new_size / index_inc != arr->data_size){
+			return INDEX_TOO_LARGE;
+		}
+
+		new_arr = realloc(arr->arr, new_size);
+
+		if(new_arr == NULL){
+			return REALLOC_FAIL;
+		}
+
+		arr->arr_size = index_inc;
+
+	size_found:
+		arr->arr = new_arr;
+
+	return SUCCESS;
+}
+
 size_t edsa_exparr_init(edsa_exparr *restrict *const restrict arr, const size_t arr_size, const size_t data_size)
 {
 	size_t alloc_size = arr_size * data_size;
