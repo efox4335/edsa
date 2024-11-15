@@ -22,6 +22,7 @@ size_t check_arr(size_t *arr, size_t size)
 	return size;
 }
 
+//sets all elements of arr to -1
 void reset_arr(size_t *arr, size_t size)
 {
 	for(size_t i = 0; i < size; ++i){
