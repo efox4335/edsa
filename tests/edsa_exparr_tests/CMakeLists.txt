@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.29.3)
 
 set(test_sources
 	edsa_exparr_basic_func.c;
-	edsa_exparr_data_intgr.c)
+	edsa_exparr_data_intgr.c;
+	edsa_exparr_read_bounds.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
