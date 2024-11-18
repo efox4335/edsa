@@ -149,8 +149,8 @@ size_t edsa_exparr_copy(edsa_exparr *const restrict arr, size_t src_index, size_
 		return EDSA_SUCCESS;
 	}
 
-	memcpy(((char *) arr->arr) + src_index * arr->data_size,
-	((char *) arr->arr) + dest_index * arr->data_size,
+	memcpy(((char *) arr->arr) + dest_index * arr->data_size,
+	((char *) arr->arr) + src_index * arr->data_size,
 	arr->data_size);
 
 	return EDSA_SUCCESS;
