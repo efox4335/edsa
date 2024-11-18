@@ -21,8 +21,8 @@ Must include `edsa.h` in `src/` directory. Must link aginst either `libedsa_shar
 ## exparr
 To use exparr a vairable of type `edsa_exparr *` will need to be created.
 
-### `edsa_exparr_init()`
-Initalizes an exparr data structure.
+### `edsa_exparr_init(edsa_exparr **arr, size_t arr_size, size_t data_size)`
+Initalizes exparr `arr` with size `arr_size` and data size `data_size`.
 
 Arguments:
  - First argument the address of the `edsa_exparr *` vairable.
@@ -49,8 +49,8 @@ edsa_exparr *arr;
 error_val = edsa_exparr_init(&arr, 10, sizeof(char));
 ```
 
-### `edsa_exparr_free()`
-Frees an exparr data structure.
+### `edsa_exparr_free(edsa_exparr *arr)`
+Frees exparr `arr`.
 
 Argumens:
  - First argument a pointer of type `edsa_exparr *`.
@@ -70,8 +70,8 @@ edsa_exparr *arr;
 error_val = edsa_exparr_free(arr);
 ```
 
-### `edsa_exparr_ins()`
-Inserts data into exparr at specified index.
+### `edsa_exparr_ins(edsa_exparr *arr, size_t index, void *data)`
+Inserts data `*data` into exparr `arr` at index `index`.
 
 Arguments:
  - First argument a pointer of type `edsa_exparr *`.
@@ -133,8 +133,8 @@ edsa_exparr *arr;
 error_val = edsa_exparr_copy(arr, 0, 1);
 ```
 
-### `edsa_exparr_read()`
-Reads data from exparr and stores at location pointed to by third argument.
+### `edsa_exparr_read(edsa_exparr *arr, size_t index, void *data)`
+Copies data at index `index` from exparr `arr` to `*data`.
 
 Arguments:
  - First argument a pointer of type `edsa_exparr *`.
@@ -210,8 +210,8 @@ error_val = edsa_exparr_free(arr);
 ## heap
 To use a vairable of type `edsa_heap` will need to be created.
 
-### `edsa_heap_init()`
-Initalizes a heap data structure.
+### `edsa_heap_init(edsa_heap **heap, size_t heap_size, size_t data_size, int (*cmp_func)(const void *const, const void *const))`
+Initalizes heap `heap` with heap size `heap_size` data size `data_size` and compare function `cmp_func`.
 
 Arguments:
  - First argument the address of a pointer of type `edsa_heap`.
