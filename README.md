@@ -100,6 +100,39 @@ char c = 'c';
 error_val = edsa_exparr_ins(arr, 1, &c);
 ```
 
+### `edsa_exparr_copy(edsa_exparr *arr, size_t src_index, size_t dest_index)`
+Copies the data at index `src_index` to index `dest_index` in exparr `arr`.
+
+Arguments:
+ - First argument a pointer of type `edsa_exparr *`.
+   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+ - Second argument an index which the data will be copied from.
+   - Must have been previously written to with `edsa_exparr_ins()`.
+ - Third argument an index which the data will be copied to.
+   - Array will expand in size if index is outside of array.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_EXPARR_COPY_INVALID_SRC_INDEX`
+   - Returns if the index specified by the second argument is outside bounds allocated by the array.
+   - Does not check if index has been previously written to.
+ - `EDSA_EXPARR_COPY_INVALID_DEST_INDEX`
+   - Returns if the index specified by the third argument would cause the array to be to large to be stored.
+ - `EDSA_EXPARR_COPY_REALLOC_FAIL`
+   - Returns if `realloc()` fails on the array.
+   - Still needs to be freed by `edsa_exparr_free()`.
+
+#### Example
+```c
+size_t error_val;
+edsa_exparr *arr;
+
+...
+
+error_val = edsa_exparr_copy(arr, 0, 1);
+```
+
 ### `edsa_exparr_read()`
 Reads data from exparr and stores at location pointed to by third argument.
 
@@ -169,6 +202,7 @@ char *s = NULL;
 error_val = edsa_exparr_init(&arr, 10, sizeof(char));
 error_val = edsa_exparr_ins(arr, 1, &c);
 error_val = edsa_exparr_read(arr, 1, &c);
+error_val = edsa_exparr_copy(arr, 1, 2);
 error_val = edsa_exparr_get_ele_ptr(arr, 1, (void **) &s);
 error_val = edsa_exparr_free(arr);
 ```
