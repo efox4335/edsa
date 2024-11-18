@@ -24,7 +24,12 @@ static size_t resize_array(edsa_exparr *const restrict arr, size_t size)
 	const size_t index_inc = size + 1;
 	void *new_arr = NULL;
 
-	if(size + 1 > arr->arr_size * 2){
+	//needs to be checked now because if size is the max val then if(index_inc > arr->arr_size * 2) pass when it shouldn't
+	if(index_inc < size){
+		return INDEX_TOO_LARGE;
+	}
+
+	if(index_inc > arr->arr_size * 2){
 		goto index_size;
 	}
 
@@ -49,10 +54,6 @@ static size_t resize_array(edsa_exparr *const restrict arr, size_t size)
 	goto size_found;
 
 	index_size://executes only if arr->arr_size * 2 is unsuitable
-		if(index_inc < size){
-			return INDEX_TOO_LARGE;
-		}
-
 		new_size = index_inc * arr->data_size;
 
 		if(new_size / index_inc != arr->data_size){
