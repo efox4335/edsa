@@ -126,6 +126,35 @@ size_t edsa_exparr_ins(edsa_exparr *const restrict arr, size_t index, void *cons
 	return EDSA_SUCCESS;
 }
 
+//reallocs arr if dest_index would cause buffer overflow
+size_t edsa_exparr_copy(edsa_exparr *const restrict arr, size_t src_index, size_t dest_index)
+{
+	if(src_index >= arr->arr_size){
+		return EDSA_EXPARR_COPY_INVALID_SRC_INDEX;
+	}
+
+	if(dest_index >= arr->arr_size){
+		switch(resize_array(arr, dest_index)){
+			case INDEX_TOO_LARGE:
+				return EDSA_EXPARR_COPY_INVALID_DEST_INDEX;
+			case REALLOC_FAIL:
+				return EDSA_EXPARR_COPY_REALLOC_FAIL;
+			case SUCCESS:
+				break;
+		}
+	}
+
+	if(dest_index == src_index){
+		return EDSA_SUCCESS;
+	}
+
+	memcpy(((char *) arr->arr) + src_index * arr->data_size,
+	((char *) arr->arr) + dest_index * arr->data_size,
+	arr->data_size);
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_exparr_read(edsa_exparr *const restrict arr, size_t index, void *const restrict data)
 {
 	if(index >= arr->arr_size){
