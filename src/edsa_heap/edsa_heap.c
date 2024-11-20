@@ -105,17 +105,17 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	void *right_child_ptr = malloc(heap->data_size);
 	void *parent_ptr = malloc(heap->data_size);
 	void *largest_child_ptr = malloc(heap->data_size);
+	void *temp_parent_cashe = malloc(heap->data_size);
 
-	edsa_exparr_read(heap->heap, parent_index, parent_ptr);
-
-	void *temp_parent_cashe = NULL;
-
-	temp_parent_cashe = malloc(heap->data_size);
-
-	if(temp_parent_cashe == NULL){
+	if(temp_parent_cashe == NULL ||
+	left_child_ptr == NULL ||
+	right_child_ptr == NULL ||
+	parent_ptr == NULL ||
+	largest_child_ptr == NULL){
 		return DOWN_HEAP_MALLOC_FAIL;
 	}
 
+	edsa_exparr_read(heap->heap, parent_index, parent_ptr);
 	edsa_exparr_read(heap->heap, index, temp_parent_cashe);
 
 	while(1){
