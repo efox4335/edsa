@@ -161,37 +161,6 @@ char c;
 error_val = edsa_exparr_read(arr, 1, &c);
 ```
 
-### `edsa_exparr_get_ele_ptr()`
-Sets third argument to point to data at index specified by second argument. Data in the range from the value of the third argument to that value plus the data size given to `edsa_exparr_init()` can be read from and writted to.
-
-Arguments:
- - First argument a pointer of type `edsa_exparr *`.
-   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
- - Second argument the index from which the data will be read.
-   - Does not check if that index has previously been written to.
- - Third arugment the address of a pointer that will be changed to point to an address that contains the data pointed to by the third argument of `edsa_exparr_ins()` with the same second argument.
-   - Must be cast to type `(void **)`.
-   - Data in the range from the value of the third argument to that value plus the data size given to `edsa_exparr_init()` can be read from and writted to.
-   - Must not pass as third argument to `edsa_exparr_ins()` with same second argument.
-
-Return values:
- - `EDSA_SUCCESS`
-   - Returns upon successful run.
- - `EDSA_EXPARR_READ_INVALID_INDEX`
-   - Returns if a read it attempted at an index that is not allocated for that array.
-   - Does not check if data at index has been to written previously.
-
-#### Example
-```c
-size_t error_val;
-edsa_exparr *arr;
-char *c;
-
-...
-
-error_val = edsa_exparr_get_ele_ptr(arr, 1, (void **) &c);
-```
-
 ### Full exparr Example
 ```c
 size_t error_val;
@@ -203,7 +172,6 @@ error_val = edsa_exparr_init(&arr, 10, sizeof(char));
 error_val = edsa_exparr_ins(arr, 1, &c);
 error_val = edsa_exparr_read(arr, 1, &c);
 error_val = edsa_exparr_copy(arr, 1, 2);
-error_val = edsa_exparr_get_ele_ptr(arr, 1, (void **) &s);
 error_val = edsa_exparr_free(arr);
 ```
 

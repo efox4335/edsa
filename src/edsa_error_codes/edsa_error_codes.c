@@ -56,9 +56,6 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW:
 			*str = "EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW";
 			break;
-		case EDSA_EXPARR_GET_ELE_PTR_INVALID_INDEX:
-			*str = "EDSA_EXPARR_GET_ELE_PTR_INVALID_INDEX";
-			break;
 		case EDSA_EXPARR_COPY_INVALID_SRC_INDEX:
 			*str = "EDSA_EXPARR_COPY_INVALID_SRC_INDEX";
 			break;
