@@ -42,11 +42,11 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 		return SUCCESS;
 	}
 
-	void *parent_ptr = NULL;
-	void *ele_ptr = NULL;
+	void *parent_ptr = malloc(heap->data_size);;
+	void *ele_ptr = malloc(heap->data_size);;
 
-	edsa_exparr_get_ele_ptr(heap->heap, index, (void **) &ele_ptr);
-	edsa_exparr_get_ele_ptr(heap->heap, get_parent_index(index), (void **) &parent_ptr);
+	edsa_exparr_read(heap->heap, get_parent_index(index), parent_ptr);
+	edsa_exparr_read(heap->heap, index, ele_ptr);
 
 	//no need to continue if parent belongs higher then ele
 	if((*(heap->cmp_func))(parent_ptr, ele_ptr)){
@@ -76,12 +76,14 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 
 		parent_index = get_parent_index(child_index);
 
-		edsa_exparr_get_ele_ptr(heap->heap, parent_index, (void **) &parent_ptr);
+		edsa_exparr_read(heap->heap, parent_index, parent_ptr);
 	}while((*(heap->cmp_func))(ele_ptr, parent_ptr));
 
 	edsa_exparr_ins(heap->heap, child_index, ele_temp_store);
 
 	free(ele_temp_store);
+	free(parent_ptr);
+	free(ele_ptr);
 	return SUCCESS;
 }
 
