@@ -101,12 +101,12 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	size_t parent_index = index;
 	size_t largest_child_index;
 
-	void *left_child_ptr = NULL;
-	void *right_child_ptr = NULL;
-	void *parent_ptr = NULL;
-	void *largest_child_ptr = NULL;
+	void *left_child_ptr = malloc(heap->data_size);
+	void *right_child_ptr = malloc(heap->data_size);
+	void *parent_ptr = malloc(heap->data_size);
+	void *largest_child_ptr = malloc(heap->data_size);
 
-	edsa_exparr_get_ele_ptr(heap->heap, parent_index, (void **) &parent_ptr);
+	edsa_exparr_read(heap->heap, parent_index, parent_ptr);
 
 	void *temp_parent_cashe = NULL;
 
@@ -126,12 +126,12 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 		if(left_child_index >= heap->size){
 			break;
 		}else if(right_child_index >= heap->size){
-			edsa_exparr_get_ele_ptr(heap->heap, left_child_index, (void **) &largest_child_ptr);
+			edsa_exparr_read(heap->heap, left_child_index, largest_child_ptr);
 			largest_child_index = left_child_index;
 		}else{
 
-			edsa_exparr_get_ele_ptr(heap->heap, left_child_index, (void **) &left_child_ptr);
-			edsa_exparr_get_ele_ptr(heap->heap, right_child_index, (void **) &right_child_ptr);
+			edsa_exparr_read(heap->heap, left_child_index, left_child_ptr);
+			edsa_exparr_read(heap->heap, right_child_index, right_child_ptr);
 
 			if((*(heap->cmp_func))(left_child_ptr, right_child_ptr)){
 				largest_child_ptr = left_child_ptr;
@@ -153,6 +153,10 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	edsa_exparr_ins(heap->heap, parent_index, temp_parent_cashe);
 
 	free(temp_parent_cashe);
+	free(parent_ptr);
+	free(largest_child_ptr);
+	free(right_child_ptr);
+	free(left_child_ptr);
 
 	return SUCCESS;
 }
