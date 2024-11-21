@@ -79,6 +79,8 @@ Arguments:
  - Second argument an index at which the data will be put.
    - Array will expand in size if index is outside of array.
  - Third argument a pointer to the data to be inserted.
+   - Data must be the same size as supplied to `edsa_exparr_init()`.
+
 
 Return values:
  - `EDSA_SUCCESS`
