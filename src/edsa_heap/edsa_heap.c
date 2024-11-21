@@ -124,8 +124,8 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 		if(left_child_index >= heap->size){
 			break;
 		}else if(right_child_index >= heap->size){
-			edsa_exparr_read(heap->heap, left_child_index, right_child_ptr);
-			largest_child_ptr = right_child_ptr;
+			edsa_exparr_read(heap->heap, left_child_index, left_child_ptr);
+			largest_child_ptr = left_child_ptr;
 			largest_child_index = left_child_index;
 		}else{
 
