@@ -241,6 +241,10 @@ size_t edsa_heap_remove(edsa_heap *const restrict heap, void *const restrict dat
 {
 	size_t ret_val = 0;
 
+	if(heap->size == 0){
+		return EDSA_HEAP_REMOVE_HEAP_EMPTY;
+	}
+
 	edsa_exparr_read(heap->heap, 0, data);
 
 	edsa_exparr_copy(heap->heap, heap->size - 1, 0);

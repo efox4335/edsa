@@ -77,6 +77,9 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HEAP_REMOVE_MALLOC_FAIL:
 			*str = "EDSA_HEAP_REMOVE_MALLOC_FAIL";
 			break;
+		case EDSA_HEAP_REMOVE_HEAP_EMPTY:
+			*str = "EDSA_HEAP_REMOVE_HEAP_EMPTY";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
