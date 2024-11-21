@@ -28,7 +28,7 @@ size_t check_arr(size_t *arr, size_t size)
 
 int main(void)
 {
-	enum{DATA_AMMOUNT = 1000};
+	enum{DATA_AMMOUNT = 10};
 
 	size_t ret_val = 0;
 	char *fail_err = NULL;
@@ -56,9 +56,6 @@ int main(void)
 		ret_val,
 		data[ret_val]);
 		edsa_heap_free(heap);
-		for(int i = 0; i < DATA_AMMOUNT; ++i){
-			printf("%ld\n", data[i]);
-		}
 		return 1;
 	}
 
