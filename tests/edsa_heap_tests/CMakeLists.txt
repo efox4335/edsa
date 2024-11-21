@@ -4,7 +4,8 @@ set(test_sources
 	edsa_heap_free_leak.c;
 	edsa_heap_init_mul_overflow.c;
 	edsa_heap_init_zero_alloc_size.c;
-	edsa_heap_init_success.c)
+	edsa_heap_init_success.c;
+	edsa_heap_change_cmp_func_success.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
