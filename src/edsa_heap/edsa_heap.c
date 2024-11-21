@@ -236,6 +236,28 @@ size_t edsa_heap_ins(edsa_heap *const restrict heap, void *const restrict data)
 	return EDSA_SUCCESS;
 }
 
+//outputs the element at the top of the heap moves the bottom element to the to then calls down_heap on it
+size_t edsa_heap_remove(edsa_heap *const restrict heap, void *const restrict data)
+{
+	size_t ret_val = 0;
+
+	edsa_exparr_read(heap->heap, 0, data);
+
+	edsa_exparr_copy(heap->heap, heap->size - 1, 0);
+	heap->size -= 1;//must be done before call to down_heap as it uses heap->size
+
+	ret_val = down_heap(heap, 0);
+
+	switch(ret_val){
+		case DOWN_HEAP_MALLOC_FAIL:
+			return EDSA_HEAP_REMOVE_MALLOC_FAIL;
+		case SUCCESS:
+			break;
+	}
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)(const void *const, const void *const))
 {
 	heap->cmp_func = cmp_func;
