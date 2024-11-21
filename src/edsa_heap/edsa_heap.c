@@ -43,23 +43,20 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 	}
 
 	void *parent_temp_store = malloc(heap->data_size);
-	void *ele_ptr = malloc(heap->data_size);
 
 	//stores node at index to avoid swaps
 	void *ele_temp_store = malloc(heap->data_size);
 
 	if(ele_temp_store == NULL ||
-	parent_temp_store == NULL ||
-	ele_ptr == NULL){
+	parent_temp_store == NULL){
 		return UP_HEAP_MALLOC_FAIL;
 	}
 
 	edsa_exparr_read(heap->heap, get_parent_index(index), parent_temp_store);
-	edsa_exparr_read(heap->heap, index, ele_ptr);
 	edsa_exparr_read(heap->heap, index, ele_temp_store);
 
 	//no need to continue if parent belongs higher then ele
-	if((*(heap->cmp_func))(parent_temp_store, ele_ptr)){
+	if((*(heap->cmp_func))(parent_temp_store, ele_temp_store)){
 		return SUCCESS;
 	}
 
@@ -78,13 +75,12 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 		parent_index = get_parent_index(child_index);
 
 		edsa_exparr_read(heap->heap, parent_index, parent_temp_store);
-	}while((*(heap->cmp_func))(ele_ptr, parent_temp_store));
+	}while((*(heap->cmp_func))(ele_temp_store, parent_temp_store));
 
 	edsa_exparr_ins(heap->heap, child_index, ele_temp_store);
 
 	free(ele_temp_store);
 	free(parent_temp_store);
-	free(ele_ptr);
 	return SUCCESS;
 }
 
