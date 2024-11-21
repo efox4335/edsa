@@ -57,6 +57,8 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 
 	//no need to continue if parent belongs higher then ele
 	if((*(heap->cmp_func))(parent_temp_store, ele_temp_store)){
+		free(ele_temp_store);
+		free(parent_temp_store);
 		return SUCCESS;
 	}
 
@@ -101,14 +103,13 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	void *left_child_ptr = malloc(heap->data_size);
 	void *right_child_ptr = malloc(heap->data_size);
 	void *parent_ptr = malloc(heap->data_size);
-	void *largest_child_ptr = malloc(heap->data_size);
+	void *largest_child_ptr = NULL;
 	void *temp_parent_cashe = malloc(heap->data_size);
 
 	if(temp_parent_cashe == NULL ||
 	left_child_ptr == NULL ||
 	right_child_ptr == NULL ||
-	parent_ptr == NULL ||
-	largest_child_ptr == NULL){
+	parent_ptr == NULL){
 		return DOWN_HEAP_MALLOC_FAIL;
 	}
 
@@ -123,7 +124,8 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 		if(left_child_index >= heap->size){
 			break;
 		}else if(right_child_index >= heap->size){
-			edsa_exparr_read(heap->heap, left_child_index, largest_child_ptr);
+			edsa_exparr_read(heap->heap, left_child_index, right_child_ptr);
+			largest_child_ptr = right_child_ptr;
 			largest_child_index = left_child_index;
 		}else{
 
@@ -151,7 +153,6 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 
 	free(temp_parent_cashe);
 	free(parent_ptr);
-	free(largest_child_ptr);
 	free(right_child_ptr);
 	free(left_child_ptr);
 
