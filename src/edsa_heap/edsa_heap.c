@@ -205,6 +205,37 @@ size_t edsa_heap_free(edsa_heap *const restrict heap)
 	return EDSA_SUCCESS;
 }
 
+//places new element at the bottom of the heap and calls up_heap on it
+size_t edsa_heap_ins(edsa_heap *const restrict heap, void *const restrict data)
+{
+	size_t ret_val = 0;
+
+	ret_val = edsa_exparr_ins(heap->heap, heap->size, data);
+
+	switch(ret_val){
+		case EDSA_EXPARR_INS_INDEX_TO_HIGH:
+			return EDSA_HEAP_INS_HEAP_FULL;
+		case EDSA_EXPARR_INS_REALLOC_FAIL:
+			return EDSA_HEAP_INS_REALLOC_FAIL;
+		case EDSA_SUCCESS:
+			break;
+	}
+
+	heap->size += 1;//must be done before call to up_heap as it uses heap->size
+
+	ret_val = up_heap(heap, heap->size - 1);
+
+	switch(ret_val){
+		case UP_HEAP_MALLOC_FAIL://heap should behave as if this function was never called
+			heap->size -= 1;
+			return EDSA_HEAP_INS_MALLOC_FAIL;
+		case SUCCESS:
+			break;
+	}
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)(const void *const, const void *const))
 {
 	heap->cmp_func = cmp_func;
