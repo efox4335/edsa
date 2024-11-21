@@ -7,7 +7,8 @@ set(test_sources
 	edsa_heap_init_success.c;
 	edsa_heap_change_cmp_func_success.c;
 	edsa_heap_change_cmp_func_output.c;
-	edsa_heap_ins_success.c)
+	edsa_heap_ins_success.c;
+	edsa_heap_ins_heap_full.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
