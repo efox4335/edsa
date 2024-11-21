@@ -213,3 +213,32 @@ size_t ret_val
 
 ret_val = edsa_heap_init(&heap, 10, sizeof(char), cmp_func);
 ```
+
+### `edsa_heap_change_cmp_func(edsa_heap *heap, int (*cmp_func)(const void *const, const void *const))`
+Changes the function used to compare between elements in heap `heap`.
+
+Arguments:
+ - First argument the address of a pointer of type `edsa_heap`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+ - Second argument is a function pointer to a user supplied function that returns type `int`, and takes two arguments of type `const void *const`. Function returns `1` if the element of the heap pointed to by the first argument should be higher up in the heap then the element pointed to by the second element. Returns `0` otherwise.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+
+#### Example
+```c
+int new_cmp_func(const void *const ele_1, const void *const ele_2)
+{
+  return *((char *) ele_1) > *((char *) ele_2)
+}
+
+...
+
+edsa_heap *heap;
+size_t ret_val
+
+...
+
+ret_val = edsa_heap_change_cmp_func(heap, new_cmp_func);
+```
