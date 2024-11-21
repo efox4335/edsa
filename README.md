@@ -1,5 +1,5 @@
 # Edsa Readme
-A data structures and algorithms library written in c.
+A data structures and algorithms library written in c. Should not be used to store sensitive information.
 ## Supported data structures/algorithms
 | Data structure/Algorithm | Description |
 | --- | --- |
@@ -243,4 +243,38 @@ size_t ret_val
 ...
 
 ret_val = edsa_heap_change_cmp_func(heap, new_cmp_func);
+```
+
+### `edsa_heap_ins(edsa_heap *heap, void *data)`
+Inserts data `data` into heap `heap`.
+
+Arguments:
+ - First argument the address of a pointer of type `edsa_heap`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+ - Second argument a pointer to data to be inserted.
+   - Data must be the same size as supplied to `edsa_heap_init()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HEAP_INS_HEAP_FULL`
+   - Returns if the heap cannot store any more data.
+ - `EDSA_HEAP_INS_REALLOC_FAIL`
+   - Returns if `realloc()` fails during call.
+   - Still needs to be freed by `edsa_heap_free()`.
+ - `EDSA_HEAP_INS_MALLOC_FAIL`
+   - Returns if `malloc()` fails during call.
+   - Still needs to be freed by `edsa_heap_free()`.
+
+#### Example
+```c
+...
+
+edsa_heap *heap;
+int data = 1;
+size_t ret_val
+
+...
+
+ret_val = edsa_heap_ins(heap, &data);
 ```
