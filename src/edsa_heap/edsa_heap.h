@@ -5,7 +5,7 @@
 #include "edsa.h"
 
 typedef struct{
-	size_t size;
+	size_t size;//number of elements currently in heap
 	size_t data_size;
 	edsa_exparr *heap;
 	int (*cmp_func)(const void *const, const void *const);
