@@ -143,7 +143,7 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 
 		if((*(heap->cmp_func))(largest_child_ptr, parent_ptr)){
 			edsa_exparr_ins(heap->heap, parent_index, largest_child_ptr);
-			parent_index = left_child_index;
+			parent_index = largest_child_index;
 		}else{
 			break;
 		}
