@@ -20,7 +20,7 @@ int main(void)
 	if(ret_val != EDSA_HEAP_REMOVE_HEAP_EMPTY){
 		edsa_get_error_string(ret_val, &fail_err);
 		edsa_get_error_string(EDSA_HEAP_REMOVE_HEAP_EMPTY, &ret_str);
-		printf("edsa_heap_remove_success.c: edsa_heap_remove failed to return %s instead returned %s\n",
+		printf("edsa_heap_remove_heap_empty.c: edsa_heap_remove failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		fflush(stdout);
 		edsa_heap_free(heap);
