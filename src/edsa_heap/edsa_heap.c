@@ -255,6 +255,7 @@ size_t edsa_heap_remove(edsa_heap *const restrict heap, void *const restrict dat
 
 	switch(ret_val){
 		case DOWN_HEAP_MALLOC_FAIL:
+			edsa_exparr_ins(heap->heap, 0, data);
 			return EDSA_HEAP_REMOVE_MALLOC_FAIL;
 		case SUCCESS:
 			break;
