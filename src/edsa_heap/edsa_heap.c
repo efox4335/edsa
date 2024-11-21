@@ -208,3 +208,10 @@ size_t edsa_heap_free(edsa_heap *const restrict heap)
 
 	return EDSA_SUCCESS;
 }
+
+size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)(const void *const, const void *const))
+{
+	heap->cmp_func = cmp_func;
+
+	return EDSA_SUCCESS;
+}
