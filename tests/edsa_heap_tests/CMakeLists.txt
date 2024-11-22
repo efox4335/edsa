@@ -13,7 +13,8 @@ set(test_sources
 	edsa_heap_remove_heap_empty.c;
 	edsa_heap_remove_output.c;
 	edsa_heap_replace_success.c;
-	edsa_heap_replace_heap_empty.c)
+	edsa_heap_replace_heap_empty.c;
+	edsa_heap_build_success.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
