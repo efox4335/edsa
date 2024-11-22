@@ -318,3 +318,33 @@ size_t edsa_heap_replace(edsa_heap *const restrict heap, void *const restrict da
 
 	return EDSA_SUCCESS;
 }
+
+size_t edsa_heap_build(edsa_heap *const restrict heap, void *const restrict arr, const size_t amount)
+{
+	size_t ret_val = 0;
+
+	for(size_t i = 0; i < amount; ++i){
+		ret_val = edsa_exparr_ins(heap->heap, i, (((char *) arr) + i * heap->data_size));
+
+		switch(ret_val){
+			case EDSA_EXPARR_INS_INDEX_TO_HIGH:
+				return EDSA_HEAP_BUILD_AMOUNT_TO_HIGH;
+			case EDSA_EXPARR_INS_REALLOC_FAIL:
+				return EDSA_HEAP_BUILD_REALLOC_FAIL;
+			case EDSA_SUCCESS:
+				break;
+		}
+	}
+
+	heap->size = amount;
+	ret_val = bottom_up_build(heap);
+
+	switch(ret_val){
+		case BOTTOM_UP_BUILD_MALLOC_FAIL:
+			return EDSA_HEAP_BUILD_MALLOC_FAIL;
+		case SUCCESS:
+			break;
+	}
+
+	return EDSA_SUCCESS;
+}
