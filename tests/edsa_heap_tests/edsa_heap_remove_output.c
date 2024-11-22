@@ -147,7 +147,7 @@ int main(void)
 	ret_val = check_sorted(data, DATA_AMOUNT);
 
 	if(ret_val != DATA_AMOUNT){
-		printf("randomized data returned at index %ld not sorted got values %d and %d\n",
+		printf("randomized data returned at index %ld not sorted got values %ld and %ld\n",
 		ret_val,
 		data[ret_val - 1],
 		data[ret_val]);
