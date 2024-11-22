@@ -217,7 +217,7 @@ ret_val = edsa_heap_init(&heap, 10, sizeof(char), cmp_func);
 ```
 
 ### `edsa_heap_change_cmp_func(edsa_heap *heap, int (*cmp_func)(const void *const, const void *const))`
-Changes the function used to compare between elements in heap `heap`.
+Changes the function used to compare between elements and rebuilds heap `heap`.
 
 Arguments:
  - First argument the a pointer of type `edsa_heap *`.
@@ -227,6 +227,10 @@ Arguments:
 Return values:
  - `EDSA_SUCCESS`
    - Returns upon successful run.
+ - `EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL`
+   - Returns when `malloc()` fails during call.
+   - Heap should be freed with `edsa_heap_free()`
+   - Behaviour of heap when used with any function other than `edsa_heap_free()` is not guaranteed.
 
 #### Example
 ```c
