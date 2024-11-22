@@ -166,7 +166,9 @@ static size_t bottom_up_build(edsa_heap *const restrict heap)
 	size_t start_index = get_parent_index(heap->size - 1);//no need to call down heap on elements that have no children
 	size_t ret_val = 0;
 
-	for(size_t i = start_index; i >= 0; --i){
+	//i + 1 needs to be checked so down_heap() will run on root of heap
+	//i will always be less than ((size_t) -1)/2 so it will never overflow
+	for(size_t i = start_index; i + 1 > (size_t) 0; --i){
 		ret_val = down_heap(heap, i);
 
 		switch(ret_val){
