@@ -16,7 +16,7 @@ Untested.
 Untested.
 
 ## Usage
-Must include `edsa.h` in `src/` directory. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `builds/` directory.
+Must include `edsa.h` in `src/` directory. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `builds/` directory. Should not be used to store sensitive information.
 
 ## exparr
 To use exparr a vairable of type `edsa_exparr *` will need to be created.
