@@ -270,3 +270,28 @@ size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)
 
 	return EDSA_SUCCESS;
 }
+
+//output the element at the top of the heap and replace it with the data at data_in and call down_heap on it
+size_t edsa_heap_replace(edsa_heap *const restrict heap, void *const restrict data_in, void *const restrict data_out)
+{
+	size_t ret_val = 0;
+
+	if(heap->size == 0){
+		return EDSA_HEAP_REPLACE_HEAP_EMPTY;
+	}
+
+	edsa_exparr_read(heap->heap, 0, data_out);
+	edsa_exparr_ins(heap->heap, 0, data_in);
+
+	ret_val = down_heap(heap, 0);
+
+	switch(ret_val){
+		case DOWN_HEAP_MALLOC_FAIL:
+			edsa_exparr_ins(heap->heap, 0, data_out);//if down_heap fails heap must be returned to previous state
+			return EDSA_HEAP_REPLACE_MALLOC_FAIL;
+		case SUCCESS:
+			break;
+	}
+
+	return EDSA_SUCCESS;
+}
