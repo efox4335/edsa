@@ -308,3 +308,42 @@ size_t ret_val
 
 ret_val = edsa_heap_remove(heap, &data);
 ```
+
+### `edsa_heap_build(edsa_heap *heap, void *arr, size_t amount)`
+Builds new heap `heap` from arr `arr` of size `amount`. Previous data stored in heap is inaccessible, but should not be considered erased or overwritten.
+
+Arguments:
+ - First argument the address of a pointer of type `edsa_heap`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+ - Second argument is an array with data of the same size as supplied to `edsa_heap_init()`.
+ - Third argument is the amount of elements to be added to the heap from the second argument.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HEAP_BUILD_REALLOC_FAIL`
+   - Returns when `realloc()` fails during call.
+   - Heap should be freed with `edsa_heap_free()`
+   - Behaviour of heap when used with any function other than `edsa_heap_free()` is not guaranteed.
+ - `EDSA_HEAP_BUILD_MALLOC_FAIL`
+   - Returns when `malloc()` fails during call.
+   - Heap should be freed with `edsa_heap_free()`
+   - Behaviour of heap when used with any function other than `edsa_heap_free()` is not guaranteed.
+ - `EDSA_HEAP_BUILD_AMOUNT_TO_HIGH`
+   - Returns when `amount` would create a heap to large to be stored.
+   - Heap should be freed with `edsa_heap_free()`
+   - Behaviour of heap when used with any function other than `edsa_heap_free()` is not guaranteed.
+
+#### Example
+
+```c
+...
+
+edsa_heap *heap;
+int data[100] = ...;
+size_t ret_val
+
+...
+
+ret_val = edsa_heap_build(heap, data, 100);
+```
