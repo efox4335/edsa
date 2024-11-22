@@ -95,6 +95,9 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HEAP_BUILD_AMOUNT_TO_HIGH:
 			*str = "EDSA_HEAP_BUILD_AMOUNT_TO_HIGH";
 			break;
+		case EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL:
+			*str = "EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
