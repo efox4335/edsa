@@ -91,7 +91,7 @@ int main(void)
 	ret_val = check_arr(data, DATA_AMOUNT);
 
 	if(ret_val != DATA_AMOUNT){
-		printf("sorted data returned at index %ld not expected expected %ld instead got %ld\n",
+		printf("edsa_heap_remove_output.c: sorted data returned at index %ld not expected expected %ld instead got %ld\n",
 		ret_val,
 		ret_val,
 		data[ret_val]);
@@ -118,7 +118,7 @@ int main(void)
 	ret_val = check_arr(data, DATA_AMOUNT);
 
 	if(ret_val != DATA_AMOUNT){
-		printf("scrambled data returned at index %ld not expected expected %ld instead got %ld\n",
+		printf("edsa_heap_remove_output.c: scrambled data returned at index %ld not expected expected %ld instead got %ld\n",
 		ret_val,
 		ret_val,
 		data[ret_val]);
@@ -145,7 +145,7 @@ int main(void)
 	ret_val = check_sorted(data, DATA_AMOUNT);
 
 	if(ret_val != DATA_AMOUNT){
-		printf("randomized data returned at index %ld not sorted got values %ld and %ld\n",
+		printf("edsa_heap_remove_output.c: randomized data returned at index %ld not sorted got values %ld and %ld\n",
 		ret_val,
 		data[ret_val - 1],
 		data[ret_val]);
