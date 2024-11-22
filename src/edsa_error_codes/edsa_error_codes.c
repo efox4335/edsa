@@ -86,6 +86,15 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HEAP_REPLACE_MALLOC_FAIL:
 			*str = "EDSA_HEAP_REPLACE_MALLOC_FAIL";
 			break;
+		case EDSA_HEAP_BUILD_REALLOC_FAIL:
+			*str = "EDSA_HEAP_BUILD_REALLOC_FAIL";
+			break;
+		case EDSA_HEAP_BUILD_MALLOC_FAIL:
+			*str = "EDSA_HEAP_BUILD_MALLOC_FAIL";
+			break;
+		case EDSA_HEAP_BUILD_AMOUNT_TO_HIGH:
+			*str = "EDSA_HEAP_BUILD_AMOUNT_TO_HIGH";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
