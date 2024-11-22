@@ -289,7 +289,18 @@ size_t edsa_heap_remove(edsa_heap *const restrict heap, void *const restrict dat
 
 size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)(const void *const, const void *const))
 {
+	size_t ret_val = 0;
+
 	heap->cmp_func = cmp_func;
+
+	ret_val = bottom_up_build(heap);
+
+	switch(ret_val){
+		case BOTTOM_UP_BUILD_MALLOC_FAIL:
+			return EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL;
+		case SUCCESS:
+			break;
+	}
 
 	return EDSA_SUCCESS;
 }
