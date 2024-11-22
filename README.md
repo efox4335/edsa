@@ -374,3 +374,64 @@ size_t ret_val
 
 ret_val = edsa_heap_free(heap);
 ```
+
+### `edsa_heap_replace(edsa_heap *heap, void *data_in, void *data_out)`
+Outputs root into `data_out`, removes the root of the heap `heap` and inserts `data_in` into the heap while maintaining the heap condition. Faster than `edsa_heap_remove()` and `edsa_heap_ins()` on the same data.
+
+Arguments:
+ - First argument the a pointer of type `edsa_heap *`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+ - Second argument a pointer to data to be inserted.
+   - Data must be the same size as supplied to `edsa_heap_init()`.
+ - Third argument a pointer to where the data will be written.
+   - Memory pointed to must be able to hold data of the same size as supplied to `edsa_heap_init()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HEAP_REPLACE_HEAP_EMPTY`
+   - Returns if the heap is empty.
+ - `EDSA_HEAP_REPLACE_MALLOC_FAIL`
+   - Returns if `malloc()` fails during call.
+
+#### Example
+```c
+...
+
+edsa_heap *heap;
+size_t ret_val
+int data = 1;
+int buf;
+
+...
+
+ret_val = edsa_heap_replace(heap, &data, &buf);
+```
+
+### Full heap Example
+```c
+int cmp_func(const void *const ele_1, const void *const ele_2)
+{
+  return *((char *) ele_1) > *((char *) ele_2)
+}
+
+int new_cmp_func(const void *const ele_1, const void *const ele_2)
+{
+  return *((char *) ele_1) > *((char *) ele_2)
+}
+
+...
+
+edsa_heap *heap;
+size_t ret_val
+int data[100] = ...;
+int buf;
+
+ret_val = edsa_heap_init(&heap, 1, sizeof(int), cmp_func);
+ret_val = edsa_heap_build(heap, data, 20);
+ret_val = edsa_heap_ins(heap, &(data[21]));
+ret_val = edsa_heap_remove(heap, &buf);
+ret_val = edsa_heap_change_cmp_func(heap, new_cmp_func);
+ret_val = edsa_heap_replace(heap, &(data[22]), &buf);
+ret_val = edsa_heap_free(heap);
+```
