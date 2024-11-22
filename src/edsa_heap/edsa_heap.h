@@ -17,6 +17,6 @@ size_t edsa_heap_ins(edsa_heap *const restrict heap, void *const restrict data);
 size_t edsa_heap_remove(edsa_heap *const restrict heap, void *const restrict data);
 size_t edsa_heap_replace(edsa_heap *const restrict heap, void *const restrict data_in, void *const restrict data_out);
 size_t edsa_heap_change_cmp_func(edsa_heap *const restrict heap, int (*cmp_func)(const void *const, const void *const));
-size_t edsa_heap_build(edsa_heap *const restrict heap, void *const restrict arr);
+size_t edsa_heap_build(edsa_heap *const restrict heap, void *const restrict arr, const size_t amount);
 
 #endif
