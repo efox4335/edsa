@@ -73,8 +73,6 @@ int main(void)
 	enum{DATA_AMOUNT = 1000};
 
 	size_t ret_val = 0;
-	char *fail_err = NULL;
-	char *ret_str = NULL;
 	edsa_heap *heap;
 	size_t data[DATA_AMOUNT];
 
