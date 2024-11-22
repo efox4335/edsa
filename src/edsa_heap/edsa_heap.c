@@ -16,7 +16,8 @@
 enum{
 	SUCCESS,
 	UP_HEAP_MALLOC_FAIL,
-	DOWN_HEAP_MALLOC_FAIL
+	DOWN_HEAP_MALLOC_FAIL,
+	BOTTOM_UP_BUILD_MALLOC_FAIL
 };
 
 static inline size_t get_parent_index(size_t index)
@@ -155,6 +156,26 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	free(parent_ptr);
 	free(right_child_ptr);
 	free(left_child_ptr);
+
+	return SUCCESS;
+}
+
+//builds heap from bottom up
+static size_t bottom_up_build(edsa_heap *const restrict heap)
+{
+	size_t start_index = get_parent_index(heap->size - 1);//no need to call down heap on elements that have no children
+	size_t ret_val = 0;
+
+	for(size_t i = start_index; i >= 0; --i){
+		ret_val = down_heap(heap, i);
+
+		switch(ret_val){
+			case DOWN_HEAP_MALLOC_FAIL:
+				return BOTTOM_UP_BUILD_MALLOC_FAIL;
+			case SUCCESS:
+				break;
+		}
+	}
 
 	return SUCCESS;
 }
