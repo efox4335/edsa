@@ -284,7 +284,7 @@ ret_val = edsa_heap_ins(heap, &data);
 ```
 
 ### `edsa_heap_remove(edsa_heap *heap, void *data)`
-Outputs into `data` and removes the root of the heap `heap` while maintaining the heap condition.
+Outputs root into `data` and removes the root of the heap `heap` while maintaining the heap condition.
 
 Arguments:
  - First argument the a pointer of type `edsa_heap *`.
