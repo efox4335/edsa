@@ -284,7 +284,7 @@ Outputs into `data` and removes the root of the heap `heap` while maintaining th
 
 Arguments:
  - First argument the address of a pointer of type `edsa_heap`.
-   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.\
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument a pointer to where the data will be written.
    - Memory pointed to must be able to hold data of the same size as supplied to `edsa_heap_init()`.
 
