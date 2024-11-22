@@ -184,7 +184,7 @@ To use a vairable of type `edsa_heap` will need to be created.
 Initalizes heap `heap` with heap size `heap_size` data size `data_size` and compare function `cmp_func`.
 
 Arguments:
- - First argument the address of a pointer of type `edsa_heap`.
+ - First argument the address of a pointer of type `edsa_heap *`.
    - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument the amount of elements you would like to be allocated.
    - Must be greater then `0`.
@@ -220,7 +220,7 @@ ret_val = edsa_heap_init(&heap, 10, sizeof(char), cmp_func);
 Changes the function used to compare between elements in heap `heap`.
 
 Arguments:
- - First argument the address of a pointer of type `edsa_heap`.
+ - First argument the a pointer of type `edsa_heap *`.
    - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument is a function pointer to a user supplied function that returns type `int`, and takes two arguments of type `const void *const`. Function returns `1` if the element of the heap pointed to by the first argument should be higher up in the heap then the element pointed to by the second element. Returns `0` otherwise.
 
@@ -249,7 +249,7 @@ ret_val = edsa_heap_change_cmp_func(heap, new_cmp_func);
 Inserts data `data` into heap `heap`.
 
 Arguments:
- - First argument the address of a pointer of type `edsa_heap`.
+ - First argument the a pointer of type `edsa_heap *`.
    - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument a pointer to data to be inserted.
    - Data must be the same size as supplied to `edsa_heap_init()`.
@@ -283,7 +283,7 @@ ret_val = edsa_heap_ins(heap, &data);
 Outputs into `data` and removes the root of the heap `heap` while maintaining the heap condition.
 
 Arguments:
- - First argument the address of a pointer of type `edsa_heap`.
+ - First argument the a pointer of type `edsa_heap *`.
    - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument a pointer to where the data will be written.
    - Memory pointed to must be able to hold data of the same size as supplied to `edsa_heap_init()`.
@@ -313,7 +313,7 @@ ret_val = edsa_heap_remove(heap, &data);
 Builds new heap `heap` from arr `arr` of size `amount`. Previous data stored in heap is inaccessible, but should not be considered erased or overwritten.
 
 Arguments:
- - First argument the address of a pointer of type `edsa_heap`.
+ - First argument the a pointer of type `edsa_heap *`.
    - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
  - Second argument is an array with data of the same size as supplied to `edsa_heap_init()`.
  - Third argument is the amount of elements to be added to the heap from the second argument.
