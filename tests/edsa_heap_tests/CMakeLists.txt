@@ -14,6 +14,7 @@ set(test_sources
 	edsa_heap_remove_output.c;
 	edsa_heap_replace_success.c;
 	edsa_heap_replace_heap_empty.c;
+	edsa_heap_replace_output.c;
 	edsa_heap_build_success.c;
 	edsa_heap_build_output.c)
 
