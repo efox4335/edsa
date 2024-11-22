@@ -347,3 +347,26 @@ size_t ret_val
 
 ret_val = edsa_heap_build(heap, data, 100);
 ```
+
+### `edsa_heap_free(edsa_heap *heap)`
+Frees heap `heap`.
+
+Arguments:
+ - First argument the a pointer of type `edsa_heap *`.
+   - Must not have been previously initialized by `edsa_heap_init()` without having been freed by `edsa_heap_free()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+
+#### Example
+```c
+...
+
+edsa_heap *heap;
+size_t ret_val
+
+...
+
+ret_val = edsa_heap_free(heap);
+```
