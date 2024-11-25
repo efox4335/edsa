@@ -82,6 +82,10 @@ static size_t next_largest_prime(size_t num)
 
 size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size)
 {
+	if(htable_size == 0){
+		return EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO;
+	}
+
 	size_t htable_size_temp = next_largest_prime(htable_size);
 
 	if(htable_size_temp == 0){
