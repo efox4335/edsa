@@ -8,7 +8,7 @@ int main(void)
 	char *fail_err = NULL;
 	char *ret_str = NULL;
 
-	edsa_htable_init(&htable, sizeof(int), sizeof(int), 1);
+	ret_val = edsa_htable_init(&htable, sizeof(int), sizeof(int), 1);
 
 	if(ret_val != EDSA_SUCCESS){
 		edsa_get_error_string(ret_val, &fail_err);
