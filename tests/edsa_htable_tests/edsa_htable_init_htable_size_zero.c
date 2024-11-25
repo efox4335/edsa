@@ -13,7 +13,7 @@ int main(void)
 	if(ret_val != EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO){
 		edsa_get_error_string(ret_val, &fail_err);
 		edsa_get_error_string(EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO, &ret_str);
-		printf("edsa_htable_init_success.c: edsa_htable_init failed to return %s instead returned %s\n",
+		printf("edsa_htable_init_size_zero.c: edsa_htable_init failed to return %s instead returned %s\n",
 		ret_str, fail_err);
 		fflush(stdout);
 		return 1;
