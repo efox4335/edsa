@@ -89,7 +89,7 @@ size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size
 	size_t htable_size_temp = next_largest_prime(htable_size);
 
 	if(htable_size_temp == 0){
-		return EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+		return EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE;
 	}
 
 	size_t ret_val = 0;
@@ -118,7 +118,7 @@ edsa_exparr_init_error:
 			case EDSA_EXPARR_INIT_MALLOC_FAILED:
 				return EDSA_HTABLE_INIT_MALLOC_FAIL;
 			case EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW:
-				return EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+				return EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE;
 			case EDSA_EXPARR_INIT_ZERO_ALLOC_SIZE:
 				return EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO;
 		}
@@ -140,7 +140,7 @@ edsa_exparr_init_error:
 
 	switch(slot_usage_arr_mark_empty(htable_temp)){
 		case SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH:
-			ret_val = EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+			ret_val = EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE;
 			goto slot_usage_arr_mark_empty_error;
 		case SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL:
 			ret_val = EDSA_HTABLE_INIT_REALLOC_FAIL;
