@@ -20,7 +20,7 @@ enum{//return codes for static functions
 
 static size_t slot_usage_arr_mark_empty(edsa_htable *const restrict htable)
 {
-	const char EMPTY_VAL = EMPTY;
+	char EMPTY_VAL = EMPTY;
 	size_t ret_val = 0;
 
 	for(size_t i = 0; i < htable->table_size; ++i){
