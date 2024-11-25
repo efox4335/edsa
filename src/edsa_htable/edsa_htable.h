@@ -1,6 +1,6 @@
 #ifndef __edsa_htable__
 #define __edsa_htable__
-#include <stdlib.h>
+#include <stddef.h>
 #include "edsa.h"
 
 typedef struct{
