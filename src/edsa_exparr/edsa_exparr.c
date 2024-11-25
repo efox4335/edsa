@@ -79,7 +79,7 @@ size_t edsa_exparr_init(edsa_exparr *restrict *const restrict arr, const size_t 
 	size_t alloc_size = arr_size * data_size;
 
 	if(alloc_size == 0){
-		return EDSA_EXPARR_INTI_ZERO_ALLOC_SIZE;
+		return EDSA_EXPARR_INIT_ZERO_ALLOC_SIZE;
 	}
 
 	if(alloc_size / data_size != arr_size){

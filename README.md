@@ -197,7 +197,7 @@ Arguments:
 Return values:
  - `EDSA_SUCCESS`
    - Returns upon successful run.
- - `EDSA_HEAP_INTI_ZERO_ALLOC_SIZE`
+ - `EDSA_HEAP_INIT_ZERO_ALLOC_SIZE`
    - Returns when `heap_size * data_size` equals 0.
    - Does not need to be freed.
  - `EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW`

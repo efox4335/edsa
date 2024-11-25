@@ -195,7 +195,7 @@ size_t edsa_heap_init(edsa_heap *restrict *const restrict heap, const size_t hea
 
 	//error checking already done by edsa_exparr_init()
 	switch(ret_val){
-		case EDSA_EXPARR_INTI_ZERO_ALLOC_SIZE:
+		case EDSA_EXPARR_INIT_ZERO_ALLOC_SIZE:
 			free(temp_heap);
 			return EDSA_HEAP_INIT_ZERO_ALLOC_SIZE;
 			break;
