@@ -5,10 +5,11 @@
 
 typedef struct{
 	size_t ele_count;
+	size_t key_size;
 	size_t data_size;
 	size_t table_size;
-	size_t load_val;
-	void *htable;
+	edsa_exparr *key_arr;
+	edsa_exparr *data_arr;
 }edsa_htable;
 
 #endif
