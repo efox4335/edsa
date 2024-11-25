@@ -5,6 +5,7 @@ A data structures and algorithms library written in c. Should not be used to sto
 | --- | --- |
 | exparr | An array that expands to fit new elements added. Supports arbitrary typed and sized data. |
 | heap | A heap with a user supplied compare function. Expands to fit arbitrary typed and sized data. |
+| htable | A hash table that expands to fit new elements added. Expands to fit arbitrary typed and sized data. |
 ## Build and Installation Instructions
 ### Linux
 From the root of the project directory run this command.
