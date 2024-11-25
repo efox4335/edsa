@@ -79,3 +79,84 @@ static size_t next_largest_prime(size_t num)
 
 	return 0;
 }
+
+size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size)
+{
+	size_t htable_size_temp = next_largest_prime(htable_size);
+
+	if(htable_size_temp == 0){
+		return EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+	}
+
+	size_t ret_val = 0;
+
+	edsa_exparr *slot_usage_arr_temp = NULL;
+	ret_val = edsa_exparr_init(&slot_usage_arr_temp, htable_size_temp, sizeof(char));
+	if(ret_val != EDSA_SUCCESS){
+		goto edsa_exparr_init_error;
+	}
+
+	edsa_exparr *key_arr_temp = NULL;
+	ret_val = edsa_exparr_init(&key_arr_temp, htable_size_temp, key_size);
+	if(ret_val != EDSA_SUCCESS){
+		goto edsa_exparr_init_error;
+	}
+
+	edsa_exparr *data_arr_temp = NULL;
+	ret_val = edsa_exparr_init(&data_arr_temp, htable_size_temp, data_size);
+	if(ret_val != EDSA_SUCCESS){
+		goto edsa_exparr_init_error;
+	}
+
+	if(0){//edsa_exparr_init error cleanup
+edsa_exparr_init_error:
+		switch(ret_val){
+			case EDSA_EXPARR_INIT_MALLOC_FAILED:
+				return EDSA_HTABLE_INIT_MALLOC_FAIL;
+			case EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW:
+				return EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+			case EDSA_EXPARR_INIT_ZERO_ALLOC_SIZE:
+				return EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO;
+		}
+	}
+
+	edsa_htable *htable_temp = malloc(sizeof(edsa_htable));
+	if(htable_temp == NULL){
+		return EDSA_HTABLE_INIT_MALLOC_FAIL;
+	}
+
+	htable_temp->data_arr = data_arr_temp;
+	htable_temp->data_size = data_size;
+	htable_temp->full_slot_count = 0;
+	htable_temp->key_arr = key_arr_temp;
+	htable_temp->key_size = key_size;
+	htable_temp->slot_usage_arr = slot_usage_arr_temp;
+	htable_temp->table_size = htable_size_temp;
+
+
+	switch(slot_usage_arr_mark_empty(htable_temp)){
+		case SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH:
+			ret_val = EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE;
+			goto slot_usage_arr_mark_empty_error;
+		case SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL:
+			ret_val = EDSA_HTABLE_INIT_REALLOC_FAIL;
+			goto slot_usage_arr_mark_empty_error;
+		default:
+			break;
+	}
+
+	if(0){//if slot_usage_arr_mark_empty returns error it shouldn't as all cases should be covered by edsa_exparr_init()
+slot_usage_arr_mark_empty_error:
+		edsa_exparr_free(key_arr_temp);
+		edsa_exparr_free(data_arr_temp);
+		edsa_exparr_free(slot_usage_arr_temp);
+
+		free(htable_temp);
+
+		return ret_val;
+	}
+
+	*htable = htable_temp;
+
+	return EDSA_SUCCESS;
+}
