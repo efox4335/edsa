@@ -63,12 +63,12 @@ static size_t next_largest_prime(size_t num)
 
 	while(pos_prime < (size_t) -1){
 		factor = 1;
-		quotient = 3;
+		quotient = 0;
 
-		while((quotient > factor) && (pos_prime != quotient * factor)){
+		do{
 			++factor;
 			quotient = pos_prime / factor;
-		}
+		}while((quotient > factor) && (pos_prime != quotient * factor));
 
 		if(pos_prime != quotient * factor){
 			return pos_prime;
