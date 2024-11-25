@@ -98,6 +98,18 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL:
 			*str = "EDSA_HEAP_CHANGE_CMP_FUNC_MALLOC_FAIL";
 			break;
+		case EDSA_HTABLE_INIT_MALLOC_FAIL:
+			*str = "EDSA_HTABLE_INIT_MALLOC_FAIL";
+			break;
+		case EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE:
+			*str = "EDSA_HTABLE_INIT_HTABLE_SIZE_TO_LARGE";
+			break;
+		case EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO:
+			*str = "EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO";
+			break;
+		case EDSA_HTABLE_INIT_REALLOC_FAIL:
+			*str = "EDSA_HTABLE_INIT_REALLOC_FAIL";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
