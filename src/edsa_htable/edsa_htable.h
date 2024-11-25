@@ -13,10 +13,10 @@ typedef struct{
 	edsa_exparr *data_arr;
 }edsa_htable;
 
-edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size);
-edsa_htable_free(edsa_htable *const restrict htable);
-edsa_htable_ins(edsa_htable *const restrict htable, void *const restrict key_in, void *const restrict data_in);
-edsa_htable_remove(edsa_htable *const restrict htable, void *const restrict key_in);
-edsa_htable_read(edsa_htable *const restrict htable, void *const restrict key_in, void *const restrict data_out);
+size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size);
+size_t edsa_htable_free(edsa_htable *const restrict htable);
+size_t edsa_htable_ins(edsa_htable *const restrict htable, void *const restrict key_in, void *const restrict data_in);
+size_t edsa_htable_remove(edsa_htable *const restrict htable, void *const restrict key_in);
+size_t edsa_htable_read(edsa_htable *const restrict htable, void *const restrict key_in, void *const restrict data_out);
 
 #endif
