@@ -1,3 +1,8 @@
+/*
+ - open addressing with quadratic probing function f(x) = x^2
+ - hash table size is always prime so load factor can get up to .5
+ - when .5 load factor is reached expand size to the next prime larger than twice the current size
+*/
 #include <stdlib.h>
 #include "edsa_htable.h"
 
