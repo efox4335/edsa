@@ -199,10 +199,13 @@ Return values:
    - Returns upon successful run.
  - `EDSA_HEAP_INTI_ZERO_ALLOC_SIZE`
    - Returns when `heap_size * data_size` equals 0.
+   - Does not need to be freed.
  - `EDSA_HEAP_INIT_MULTIPLICATION_OVERFLOW`
    - Returns when `heap_size * data_size` overflows.
+   - Does not need to be freed.
  - `EDSA_HEAP_INIT_MALLOC_FAILED`
-   - Returns when `malloc()` fails does not need to be freed.
+   - Returns when `malloc()` fails during call.
+   - Does not need to be freed.
 
 #### Example
 ```c
