@@ -27,7 +27,7 @@ Initalizes exparr `arr` with size `arr_size` and data size `data_size`.
 Arguments:
  - First argument the address of the `edsa_exparr *` vairable.
    - Must not have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
- - Second argument the amount of elements you would like to be allocated.
+ - Second argument the amount of elements to be allocated.
    - Must be greater then 0.
  - Third argument the size of the data type given by `sizeof()`.
 
