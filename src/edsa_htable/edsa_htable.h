@@ -4,7 +4,7 @@
 #include "edsa.h"
 
 typedef struct{
-	size_t ele_count;
+	size_t full_slot_count;
 	size_t key_size;
 	size_t data_size;
 	size_t table_size;
