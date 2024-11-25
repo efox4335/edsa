@@ -480,3 +480,24 @@ size_t ret_val = 0;
 
 ret_val = edsa_htable_init(&htable, sizeof(int), sizeof(int), 1);
 ```
+
+### `edsa_htable_free(edsa_htable *htable)`
+Frees htable `htable`.
+
+Arguments:
+ - First argument the address of the `edsa_htable *` vairable.
+   - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+
+#### Example
+```c
+edsa_htable *htable;
+size_t ret_val = 0;
+
+...
+
+ret_val = edsa_htable_free(htable);
+```
