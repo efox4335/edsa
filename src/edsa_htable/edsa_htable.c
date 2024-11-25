@@ -12,6 +12,33 @@ enum{
 	FULL//for slots that have an entry
 };
 
+enum{//return codes for static functions
+	SUCCESS,
+	SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL,
+	SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH
+};
+
+static size_t slot_usage_arr_mark_empty(edsa_htable *const restrict htable)
+{
+	const char EMPTY_VAL = EMPTY;
+	size_t ret_val = 0;
+
+	for(size_t i = 0; i < htable->table_size; ++i){
+		ret_val = edsa_exparr_ins(htable->slot_usage_arr, i, &EMPTY_VAL);
+
+		switch(ret_val){
+			case EDSA_EXPARR_INS_INDEX_TO_HIGH:
+				return SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH;
+			case EDSA_EXPARR_INS_REALLOC_FAIL:
+				return SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL;
+			case EDSA_SUCCESS:
+				break;
+		}
+	}
+
+	return SUCCESS;
+}
+
 //fnv-1a hash
 static size_t hash(unsigned char *restrict key, const size_t len)
 {
