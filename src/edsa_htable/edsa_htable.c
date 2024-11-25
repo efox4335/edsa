@@ -6,6 +6,12 @@
 #include <stdlib.h>
 #include "edsa_htable.h"
 
+enum{
+	EMPTY,//for slots that have never had an entry
+	DELETED,//for slots that have had an entry but was sencince deleted
+	FULL//for slots that have an entry
+};
+
 //fnv-1a hash
 static size_t hash(unsigned char *restrict key, const size_t len)
 {
