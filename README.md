@@ -442,3 +442,41 @@ ret_val = edsa_heap_change_cmp_func(heap, new_cmp_func);
 ret_val = edsa_heap_replace(heap, &(data[22]), &buf);
 ret_val = edsa_heap_free(heap);
 ```
+
+## htable
+Usage requires a vairable of type `edsa_htable *` to be created.
+
+### `edsa_htable_init(edsa_htable **htable, size_t key_size, size_t data_size, size_t htable_size)`
+Initializes a htable data structure at `*htable` of size `htable_size`. With key size `key_size` and data size `data_size`.
+
+Arguments:
+ - First argument the address of the `edsa_htable *` vairable.
+   - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
+ - Second argument the size of the key type given by `sizeof()`.
+ - Third argument the size of the data type given by `sizeof()`.
+ - Fourth argument initial size of htable.
+   - Must be larger than 0.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HTABLE_INIT_MALLOC_FAIL`
+   - Returns when `malloc()` fails during run.
+   - Does not need to be freed.
+ - `EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE`
+   - Returns when `htable_size` would create a htable to large to be stored.
+   - Does not need to be freed.
+ - `EDSA_HTABLE_INIT_HTABLE_SIZE_ZERO`
+   - Returns when `htable_size` is 0.
+   - Does not need to be freed.
+ - `EDSA_HTABLE_INIT_REALLOC_FAIL`
+   - Returns when `realloc()` fails during run.
+   - Does not need to be freed.
+
+#### Example
+```c
+edsa_htable *htable;
+size_t ret_val = 0;
+
+ret_val = edsa_htable_init(&htable, sizeof(int), sizeof(int), 1);
+```
