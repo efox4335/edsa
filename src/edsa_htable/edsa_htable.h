@@ -8,6 +8,7 @@ typedef struct{
 	size_t key_size;
 	size_t data_size;
 	size_t table_size;
+	edsa_exparr *usage_arr;
 	edsa_exparr *key_arr;
 	edsa_exparr *data_arr;
 }edsa_htable;
