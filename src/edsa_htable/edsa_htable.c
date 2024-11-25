@@ -160,3 +160,14 @@ slot_usage_arr_mark_empty_error:
 
 	return EDSA_SUCCESS;
 }
+
+size_t edsa_htable_free(edsa_htable *const restrict htable)
+{
+	edsa_exparr_free(htable->data_arr);
+	edsa_exparr_free(htable->key_arr);
+	edsa_exparr_free(htable->slot_usage_arr);
+
+	free(htable);
+
+	return EDSA_SUCCESS;
+}
