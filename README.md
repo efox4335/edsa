@@ -36,10 +36,13 @@ Return values:
    - Returns upon successful run.
  - `EDSA_EXPARR_INTI_ZERO_ALLOC_SIZE`
    - Returns when `arr_size * data_size` equals 0.
+   - Does not need to be freed.
  - `EDSA_EXPARR_INIT_MULTIPLICATION_OVERFLOW`
    - Returns when `arr_size * data_size` overflows.
+   - Does not need to be freed.
  - `EDSA_EXPARR_INIT_MALLOC_FAILED`
-   - Returns when `malloc()` fails does not need to be freed.
+   - Returns when `malloc()` fails during run.
+   - Does not need to be freed.
 
 #### Example
 ```c
