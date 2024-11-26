@@ -109,7 +109,7 @@ static size_t find_slot(edsa_htable *const restrict htable, void *const restrict
 			*index = htable->table_size;
 			break;
 		}else if(slot_state == FULL){
-			edsa_exparr_read(htable->key_arr, temp_index, &temp_slot_key);
+			edsa_exparr_read(htable->key_arr, temp_index, temp_slot_key);
 
 			if(!(memcmp(key, temp_slot_key, htable->key_size))){
 				*index = temp_index;
@@ -147,7 +147,7 @@ static size_t insert(edsa_htable *const restrict htable, void *const restrict ke
 			break;
 		}
 
-		edsa_exparr_read(htable->key_arr, ins_index, &temp_slot_key);
+		edsa_exparr_read(htable->key_arr, ins_index, temp_slot_key);
 
 		if(!(memcmp(key, temp_slot_key, htable->key_size))){
 			break;
