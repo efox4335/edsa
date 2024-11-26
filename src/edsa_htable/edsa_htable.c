@@ -191,6 +191,8 @@ temp_key_expand_table_malloc_fail:
 	new_size = next_largest_prime(new_size);
 
 	if(new_size == 0){
+		free(temp_data);
+		free(temp_key);
 		return EXPAND_TABLE_TABLE_TOO_LARGE;
 	}
 
@@ -200,10 +202,16 @@ temp_key_expand_table_malloc_fail:
 
 	switch(ret_val){
 		case EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE:
+			free(temp_data);
+			free(temp_key);
 			return EXPAND_TABLE_TABLE_TOO_LARGE;
 		case EDSA_HTABLE_INIT_MALLOC_FAIL:
+			free(temp_data);
+			free(temp_key);
 			return EXPAND_TABLE_MALLOC_FAIL;
 		case EDSA_HTABLE_INIT_REALLOC_FAIL:
+			free(temp_data);
+			free(temp_key);
 			return EXPAND_TABLE_REALLOC_FAIL;
 		default:
 			break;
@@ -239,6 +247,8 @@ temp_key_expand_table_malloc_fail:
 	htable->full_slot_count = temp_htable->full_slot_count;
 	htable->table_size = temp_htable->table_size;
 
+	free(temp_data);
+	free(temp_key);
 	edsa_htable_free(temp_htable);
 	return SUCCESS;
 }
