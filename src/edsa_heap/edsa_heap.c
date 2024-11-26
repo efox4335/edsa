@@ -48,7 +48,7 @@ static size_t up_heap(edsa_heap *heap, size_t index)
 	//stores node at index to avoid swaps
 	void *ele_temp_store = malloc(heap->data_size);
 
-	if(ele_temp_store == NULL ||
+	if(ele_temp_store == NULL ||//todo fix memory leak
 	parent_temp_store == NULL){
 		return UP_HEAP_MALLOC_FAIL;
 	}
@@ -107,7 +107,7 @@ static size_t down_heap(edsa_heap *heap, size_t index)
 	void *largest_child_ptr = NULL;
 	void *temp_parent_cashe = malloc(heap->data_size);
 
-	if(temp_parent_cashe == NULL ||
+	if(temp_parent_cashe == NULL ||//todo fix memory leak
 	left_child_ptr == NULL ||
 	right_child_ptr == NULL ||
 	parent_ptr == NULL){
