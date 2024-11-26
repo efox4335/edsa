@@ -110,7 +110,7 @@ static size_t insert(edsa_htable *const restrict htable, void *const restrict ke
 
 		edsa_exparr_read(htable->key_arr, ins_index, &temp_slot_key);
 
-		if(!(memcmp(htable->key_arr, temp_slot_key, htable->key_size))){
+		if(!(memcmp(key, temp_slot_key, htable->key_size))){
 			break;
 		}
 
