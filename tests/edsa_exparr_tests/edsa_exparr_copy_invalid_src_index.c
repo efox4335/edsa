@@ -6,7 +6,6 @@ int main(void)
 	edsa_exparr *arr;
 	size_t ele_num = 10;
 	size_t ret_val = 0;
-	char temp = '\0';
 	char *fail_err = NULL;
 	char *ret_str = NULL;
 
