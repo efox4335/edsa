@@ -122,6 +122,8 @@ static size_t insert(edsa_htable *const restrict htable, void *const restrict ke
 	edsa_exparr_ins(htable->key_arr, ins_index, key);
 	edsa_exparr_ins(htable->data_arr, ins_index, data);
 
+	htable->full_slot_count += 1;
+
 	free(temp_slot_key);
 	return SUCCESS;
 }
