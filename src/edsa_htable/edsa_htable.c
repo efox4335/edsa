@@ -307,6 +307,32 @@ size_t edsa_htable_read(edsa_htable *const restrict htable, void *const restrict
 	return EDSA_SUCCESS;
 }
 
+size_t edsa_htable_remove(edsa_htable *const restrict htable, void *const restrict key_in)
+{
+	size_t ret_val = 0;
+	size_t index = 0;
+
+	ret_val = find_slot(htable, key_in, &index);
+
+	switch(ret_val){
+		case FIND_SLOT_MALLOC_FAIL:
+			return EDSA_HTABLE_REMOVE_MALLOC_FAIL;
+		default:
+			break;
+	}
+
+	if(index == htable->table_size){
+		return EDSA_HTABLE_REMOVE_NO_ENTRY;
+	}
+
+	char slot_empty = EMPTY;
+
+	edsa_exparr_ins(htable->slot_usage_arr, index, &slot_empty);
+
+	return EDSA_SUCCESS;
+}
+
+
 size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size)
 {
 	if(htable_size == 0){
