@@ -594,3 +594,17 @@ int key = 1;
 
 ret_val = edsa_htable_remove(htable, &key);
 ```
+
+### Full htable Example
+```c
+edsa_htable *htable;
+size_t key = 1;
+int data = 2;
+size_t ret_val = 0
+
+ret_val = edsa_htable_init(&htable, sizeof(size_t), sizeof(int), 1);
+ret_val = edsa_htable_ins(hable, &key, &data);
+ret_val = edsa_htable_read(htable, &key, &data);
+ret_val = edsa_htable_remove(htable, &key);
+ret_val = edsa_htable_free(htable);
+```
