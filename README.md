@@ -450,7 +450,7 @@ Usage requires a vairable of type `edsa_htable *` to be created.
 Initializes a htable data structure at `*htable` of size `htable_size`. With key size `key_size` and data size `data_size`.
 
 Arguments:
- - First argument the address of the `edsa_htable *` vairable.
+ - First argument the address of a `edsa_htable *` vairable.
    - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
  - Second argument the size of the key type given by `sizeof()`.
  - Third argument the size of the data type given by `sizeof()`.
@@ -485,7 +485,7 @@ ret_val = edsa_htable_init(&htable, sizeof(int), sizeof(int), 1);
 Frees htable `htable`.
 
 Arguments:
- - First argument the address of the `edsa_htable *` vairable.
+ - First argument a `edsa_htable *` vairable.
    - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
 
 Return values:
