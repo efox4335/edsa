@@ -20,7 +20,8 @@ enum{//return codes for static functions
 	INSERT_MALLOC_FAIL,
 	EXPAND_TABLE_TABLE_TOO_LARGE,
 	EXPAND_TABLE_MALLOC_FAIL,
-	EXPAND_TABLE_REALLOC_FAIL
+	EXPAND_TABLE_REALLOC_FAIL,
+	FIND_SLOT_MALLOC_FAIL
 };
 
 static size_t slot_usage_arr_mark_empty(edsa_htable *const restrict htable)
@@ -83,6 +84,44 @@ static size_t next_largest_prime(size_t num)
 	}
 
 	return 0;
+}
+
+//sets index to the index of the slot with the associated key or if no slot is found htable->table_size
+static size_t find_slot(edsa_htable *const restrict htable, void *const restrict key, size_t *index)
+{
+	size_t hash_temp = hash(key, htable->key_size);
+	size_t probe_offset = 0;
+	size_t temp_index = 0;
+	char slot_state = 0;
+	void *temp_slot_key = malloc(htable->key_size);
+
+	if(temp_slot_key == NULL){
+		return FIND_SLOT_MALLOC_FAIL;
+	}
+
+	hash_temp %= htable->table_size;//keeps from temp_index getting too big
+
+	while(1){//no need for other break conditions as quadratic probing guarantees a slot will be found and if an empty slot is found no entry with that key is in the htable
+		temp_index = (hash_temp + probe_offset * probe_offset) % (htable->table_size);//quadratic probe
+		edsa_exparr_read(htable->slot_usage_arr, temp_index, &slot_state);
+
+		if(slot_state == EMPTY){
+			*index = htable->table_size;
+			break;
+		}else if(slot_state == FULL){
+			edsa_exparr_read(htable->key_arr, temp_index, &temp_slot_key);
+
+			if(!(memcmp(key, temp_slot_key, htable->key_size))){
+				*index = temp_index;
+				break;
+			}
+		}
+
+		++probe_offset;
+	}
+
+	free(temp_slot_key);
+	return SUCCESS;
 }
 
 //no need to check if the load factor is to big as edsa_htable_ins() will ensure it won't be to big
