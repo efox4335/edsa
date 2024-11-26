@@ -17,7 +17,10 @@ enum{//return codes for static functions
 	SUCCESS,
 	SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL,
 	SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH,
-	INSERT_MALLOC_FAIL
+	INSERT_MALLOC_FAIL,
+	EXPAND_TABLE_TABLE_TOO_LARGE,
+	EXPAND_TABLE_MALLOC_FAIL,
+	EXPAND_TABLE_REALLOC_FAIL
 };
 
 static size_t slot_usage_arr_mark_empty(edsa_htable *const restrict htable)
@@ -120,6 +123,82 @@ static size_t insert(edsa_htable *const restrict htable, void *const restrict ke
 	edsa_exparr_ins(htable->data_arr, ins_index, data);
 
 	free(temp_slot_key);
+	return SUCCESS;
+}
+
+static size_t expand_table(edsa_htable *const restrict htable)
+{
+	void *temp_key = malloc(htable->key_size);
+	if(temp_key == NULL){
+		goto temp_key_expand_table_malloc_fail;
+	}
+
+	void *temp_data = malloc(htable->data_size);
+	if(temp_data == NULL){
+		goto temp_data_expand_table_malloc_fail;
+	}
+
+	if(0){
+temp_data_expand_table_malloc_fail:
+		free(temp_key);
+temp_key_expand_table_malloc_fail:
+		return EXPAND_TABLE_MALLOC_FAIL;
+	}
+
+	size_t new_size = htable->table_size;
+	new_size <<= 1;
+	new_size = next_largest_prime(new_size);
+
+	if(new_size == 0){
+		return EXPAND_TABLE_TABLE_TOO_LARGE;
+	}
+
+	size_t ret_val = 0;
+	edsa_htable *temp_htable = NULL;
+	ret_val = edsa_htable_init(&temp_htable, htable->key_size, htable->data_size, new_size);
+
+	switch(ret_val){
+		case EDSA_HTABLE_INIT_HTABLE_SIZE_TOO_LARGE:
+			return EXPAND_TABLE_TABLE_TOO_LARGE;
+		case EDSA_HTABLE_INIT_MALLOC_FAIL:
+			return EXPAND_TABLE_MALLOC_FAIL;
+		case EDSA_HTABLE_INIT_REALLOC_FAIL:
+			return EXPAND_TABLE_REALLOC_FAIL;
+		default:
+			break;
+	}
+
+	char slot_state = 0;
+
+	for(size_t i = 0; i < htable->table_size; ++i){
+		edsa_exparr_read(htable->slot_usage_arr, i, &slot_state);
+
+		if(slot_state == FULL){
+			edsa_exparr_read(htable->key_arr, i, temp_key);
+			edsa_exparr_read(htable->data_arr, i, temp_data);
+
+			insert(temp_htable, temp_key, temp_data);
+		}
+	}
+
+	//swaps the arrays with the new hash table with the arrays with the old hash table so edsa_htable_free() can free them along with temp_htable
+	edsa_exparr *temp_arr;
+	temp_arr = htable->slot_usage_arr;
+	htable->slot_usage_arr = temp_htable->slot_usage_arr;
+	temp_htable->slot_usage_arr = temp_arr;
+
+	temp_arr = htable->key_arr;
+	htable->key_arr = temp_htable->key_arr;
+	temp_htable->key_arr = temp_arr;
+
+	temp_arr = htable->data_arr;
+	htable->data_arr = temp_htable->data_arr;
+	temp_htable->data_arr = temp_arr;
+
+	htable->full_slot_count = temp_htable->full_slot_count;
+	htable->table_size = temp_htable->table_size;
+
+	edsa_htable_free(temp_htable);
 	return SUCCESS;
 }
 
