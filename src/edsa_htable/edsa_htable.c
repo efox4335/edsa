@@ -325,9 +325,9 @@ size_t edsa_htable_remove(edsa_htable *const restrict htable, void *const restri
 		return EDSA_HTABLE_REMOVE_NO_ENTRY;
 	}
 
-	char slot_empty = EMPTY;
+	char slot_deleted = DELETED;
 
-	edsa_exparr_ins(htable->slot_usage_arr, index, &slot_empty);
+	edsa_exparr_ins(htable->slot_usage_arr, index, &slot_deleted);
 	htable->full_slot_count -= 1;
 
 	return EDSA_SUCCESS;
