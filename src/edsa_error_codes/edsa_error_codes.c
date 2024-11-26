@@ -110,6 +110,15 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HTABLE_INIT_REALLOC_FAIL:
 			*str = "EDSA_HTABLE_INIT_REALLOC_FAIL";
 			break;
+		case EDSA_HTABLE_INS_HTABLE_TOO_LARGE:
+			*str = "EDSA_HTABLE_INS_HTABLE_TOO_LARGE";
+			break;
+		case EDSA_HTABLE_INS_MALLOC_FAIL:
+			*str = "EDSA_HTABLE_INS_MALLOC_FAIL";
+			break;
+		case EDSA_HTABLE_INS_REALLOC_FAIL:
+			*str = "EDSA_HTABLE_INS_REALLOC_FAIL";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
