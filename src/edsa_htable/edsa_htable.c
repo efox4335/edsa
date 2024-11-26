@@ -204,6 +204,37 @@ temp_key_expand_table_malloc_fail:
 	return SUCCESS;
 }
 
+size_t edsa_htable_ins(edsa_htable *const restrict htable, void *const restrict key_in, void *const restrict data_in)
+{
+	size_t ret_val = 0;
+
+	if(((htable->full_slot_count) << 1) >= htable->table_size){
+		ret_val = expand_table(htable);
+
+		switch(ret_val){
+			case EXPAND_TABLE_MALLOC_FAIL:
+				return EDSA_HTABLE_INS_MALLOC_FAIL;
+			case EXPAND_TABLE_REALLOC_FAIL:
+				return EDSA_HTABLE_INS_REALLOC_FAIL;
+			case EXPAND_TABLE_TABLE_TOO_LARGE:
+				return EDSA_HTABLE_INS_HTABLE_TOO_LARGE;
+			default:
+				break;
+		}
+	}
+
+	ret_val = insert(htable, key_in, data_in);
+
+	switch(ret_val){
+		case INSERT_MALLOC_FAIL:
+			return EDSA_HTABLE_INS_MALLOC_FAIL;
+		default:
+			break;
+	}
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size)
 {
 	if(htable_size == 0){
