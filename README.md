@@ -565,3 +565,32 @@ int data;
 
 ret_val = edsa_htable_read(htable, &key, &data);
 ```
+
+### `edsa_htable_remove(edsa_htable *htable, void *key_in)`
+Removes data from htable `htable` previously inserted with key `key_in`. Data should not be considered erased.
+
+Arguments:
+ - First argument a `edsa_htable *` vairable.
+   - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
+ - Second argument a pointer to a key of size given to `edsa_htable_init()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HTABLE_REMOVE_NO_ENTRY`
+   - Returns if there is no entry associated with the given key.
+   - Htable is in the same state as before call.
+ - `EDSA_HTABLE_REMOVE_MALLOC_FAIL`
+   - Returns if `malloc()` fails during call.
+   - Htable is in the same state as before call.
+
+#### Example
+```c
+edsa_htable *htable;
+size_t ret_val = 0;
+int key = 1;
+
+...
+
+ret_val = edsa_htable_remove(htable, &key);
+```
