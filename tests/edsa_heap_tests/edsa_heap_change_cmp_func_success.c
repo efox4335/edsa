@@ -13,7 +13,6 @@ int cmp_func_2(const void *const a, const void *const b)
 
 int main(void)
 {
-	size_t ele_num = 10;
 	size_t ret_val = 0;
 	char *fail_err = NULL;
 	char *ret_str = NULL;
