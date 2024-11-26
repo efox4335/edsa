@@ -503,7 +503,7 @@ ret_val = edsa_htable_free(htable);
 ```
 
 ### `edsa_htable_ins(edsa_htable *htable, void *key_in, void *data_in)`
-Inserts and entry into htable `htable` with key `key_in` and data `data_in`.
+Inserts and entry into htable `htable` with key `key_in` and data `data_in`. Will overwrite data previously inserted with the same key.
 
 Arguments:
  - First argument a `edsa_htable *` vairable.
