@@ -125,6 +125,12 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HTABLE_READ_MALLOC_FAIL:
 			*str = "EDSA_HTABLE_READ_MALLOC_FAIL";
 			break;
+		case EDSA_HTABLE_REMOVE_NO_ENTRY:
+			*str = "EDSA_HTABLE_REMOVE_NO_ENTRY";
+			break;
+		case EDSA_HTABLE_REMOVE_MALLOC_FAIL:
+			*str = "EDSA_HTABLE_REMOVE_MALLOC_FAIL";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
