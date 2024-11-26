@@ -4,6 +4,7 @@
  - when .5 load factor is reached expand size to the next prime larger than twice the current size
 */
 #include <stdlib.h>
+#include <string.h>
 #include "edsa_htable.h"
 
 enum{
@@ -15,7 +16,8 @@ enum{
 enum{//return codes for static functions
 	SUCCESS,
 	SLOT_USAGE_ARR_MARK_EMPTY_REALLOC_FAIL,
-	SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH
+	SLOT_USAGE_ARR_MARK_EMPTY_INDEX_TOO_HIGH,
+	INSERT_MALLOC_FAIL
 };
 
 static size_t slot_usage_arr_mark_empty(edsa_htable *const restrict htable)
@@ -78,6 +80,47 @@ static size_t next_largest_prime(size_t num)
 	}
 
 	return 0;
+}
+
+//no need to check if the load factor is to big as edsa_htable_ins() will ensure it won't be to big
+static size_t insert(edsa_htable *const restrict htable, void *const restrict key, void *const restrict data)
+{
+	size_t hash_temp = hash(key, htable->key_size);
+	size_t probe_offset = 0;
+	size_t ins_index = 0;
+	char slot_state = 0;
+	void *temp_slot_key = malloc(htable->key_size);
+
+	if(temp_slot_key == NULL){
+		return INSERT_MALLOC_FAIL;
+	}
+
+	hash_temp %= htable->table_size;//keeps from ins_index getting too big
+
+	while(1){//no need for other break conditions as quadratic probing guarantees a slot will be found
+		ins_index = (hash_temp + probe_offset * probe_offset) % (htable->table_size);//quadratic probe
+		edsa_exparr_read(htable->slot_usage_arr, ins_index, &slot_state);
+
+		if(slot_state != FULL){
+			break;
+		}
+
+		edsa_exparr_read(htable->key_arr, ins_index, &temp_slot_key);
+
+		if(!(memcmp(htable->key_arr, temp_slot_key, htable->key_size))){
+			break;
+		}
+
+		++probe_offset;
+	}
+
+	slot_state = FULL;
+	edsa_exparr_ins(htable->slot_usage_arr, ins_index, &slot_state);
+	edsa_exparr_ins(htable->key_arr, ins_index, key);
+	edsa_exparr_ins(htable->data_arr, ins_index, data);
+
+	free(temp_slot_key);
+	return SUCCESS;
 }
 
 size_t edsa_htable_init(edsa_htable *restrict *const restrict htable, const size_t key_size, const size_t data_size, const size_t htable_size)
