@@ -501,3 +501,35 @@ size_t ret_val = 0;
 
 ret_val = edsa_htable_free(htable);
 ```
+
+### `edsa_htable_ins(edsa_htable *htable, void *key_in, void *data_in)`
+Inserts and entry into htable `htable` with key `key_in` and data `data_in`.
+
+Arguments:
+ - First argument a `edsa_htable *` vairable.
+   - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_HTABLE_INS_HTABLE_TOO_LARGE`
+   - Returns when insertion would cause htable to be too large to store.
+   - Htable is in the same state as before call.
+ - `EDSA_HTABLE_INS_MALLOC_FAIL`
+   - Returns when `malloc()` fails during call.
+   - Htable is in the same state as before call.
+ - `EDSA_HTABLE_INS_REALLOC_FAIL`
+   - Returns when `realloc()` fails during call.
+   - Htable is in the same state as before call.
+
+#### Example
+```c
+edsa_htable *htable;
+size_t ret_val = 0;
+int key = 1;
+int data = 24;
+
+...
+
+ret_val = edsa_htable_ins(htable, &key, &data);
+```
