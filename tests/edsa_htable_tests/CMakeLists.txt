@@ -7,7 +7,8 @@ set(test_sources
 	edsa_htable_free_success.c;
 	edsa_htable_ins_success.c;
 	edsa_htable_read_success.c;
-	edsa_htable_read_no_entry.c)
+	edsa_htable_read_no_entry.c;
+	edsa_htable_read_output.c)
 
 foreach(s_file IN LISTS test_sources)
 	string(REPLACE ".c" "" test_names ${s_file})
