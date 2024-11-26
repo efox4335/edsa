@@ -247,7 +247,7 @@ size_t edsa_htable_ins(edsa_htable *const restrict htable, void *const restrict 
 {
 	size_t ret_val = 0;
 
-	if(((htable->full_slot_count) << 1) >= htable->table_size){
+	if(((htable->full_slot_count) << 1) >= (htable->table_size - 1)){
 		ret_val = expand_table(htable);
 
 		switch(ret_val){
