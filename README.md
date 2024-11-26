@@ -508,6 +508,8 @@ Inserts and entry into htable `htable` with key `key_in` and data `data_in`. Wil
 Arguments:
  - First argument a `edsa_htable *` vairable.
    - Must not have been previously initialized by `edsa_htable_init()` without having been freed by `edsa_htable_free()`.
+ - Second argument a pointer to a key of size given to `edsa_htable_init()`.
+ - Third argument a pointer to data of size given to `edsa_htable_init()`.
 
 Return values:
  - `EDSA_SUCCESS`
