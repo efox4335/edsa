@@ -8,16 +8,22 @@ A data structures and algorithms library written in c. Should not be used to sto
 | htable | A hash table that expands to fit new elements added. Expands to fit arbitrary typed and sized data. |
 ## Build and Installation Instructions
 ### Linux
-From the root of the project directory run this command.
+Create a directory to build and run these commands from that directory.
 
-```cmake -S . --preset=release && cmake --build --preset=release```
+```git clone https://github.com/efox4335/edsa.git```
+
+```cd edsa```
+
+```cmake -S . --preset=release && cmake --build --preset=release && cmake --install builds --prefix "your install directory here"```
+
+You can then delete the build directory.
 ### Windows
 Untested.
 ### Macos
 Untested.
 
 ## Usage
-Must include `edsa.h` in `src/` directory. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `builds/` directory. Should not be used to store sensitive information.
+Must include `edsa.h` in `include/` from install directory provided. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `lib/` from install directory provided. Should not be used to store sensitive information.
 
 ## exparr
 To use exparr a vairable of type `edsa_exparr *` will need to be created.
