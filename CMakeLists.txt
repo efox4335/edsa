@@ -19,3 +19,7 @@ enable_testing()
 add_subdirectory(tests)
 
 include(CTest)
+
+install(TARGETS
+	${CMAKE_PROJECT_NAME}_static
+	${CMAKE_PROJECT_NAME}_shared)
