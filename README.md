@@ -23,7 +23,9 @@ Untested.
 Untested.
 
 ## Usage
-Must include `edsa.h` in `include/` from install directory provided. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `lib/` from install directory provided. Should not be used to store sensitive information.
+Must include `edsa.h` in `include/` from the install directory provided. Must link aginst either `libedsa_shared.so` or `libedsa_static.a` from `lib/` from the install directory provided. Should not be used to store sensitive information.
+
+All functions return `size_t` indicating the functions state upon returning. A full list of return codes can be found in `edsa_error_codes.h` in `include/` from the install directory provided.
 
 ## exparr
 To use exparr a vairable of type `edsa_exparr *` will need to be created.
