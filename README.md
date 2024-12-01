@@ -149,6 +149,41 @@ edsa_exparr *arr;
 
 error_val = edsa_exparr_copy(arr, 0, 1);
 ```
+### `edsa_exparr_sort_segment(edsa_exparr *arr, int (*cmp_func)(const void *, const void *), size_t st_index, size_t end_index)`
+Sorts segment from `st_index` to `end_index` inclusive based on `cmp_func` in exparr `arr`. Sort is not guaranteed to be stable.
+
+Arguments:
+ - First argument a pointer of type `edsa_exparr *`.
+   - Must have been previously initialized by `edsa_exparr_init()` without having been freed by `edsa_exparr_free()`.
+ - Second argument is a function pointer to a user supplied function that returns type `int`, and takes two arguments of type `const void *`. Function returns a value `>= 1` if the element of the exparr pointed to by the first argument should be later in the exparr than the element pointed too by the second argument. Function returns a value `<= -1` if the element of the exparr pointed to by the first argument should be before the element pointed to by the second argument. Function returns `0` if they are equal.
+    - Same as the function given to `qsort`.
+ - Third argument the starting index of the segment to be sorted.
+   - This index is included in the sort.
+   - Cannot be equal to or greater than fourth argument.
+ - Fourth argument the end index of the segment to be sorted.
+   - This index is included in the sort.
+   - Cannot be less than or greater than third argument.
+
+Return values:
+ - `EDSA_SUCCESS`
+   - Returns upon successful run.
+ - `EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX`
+   - Returns if less than or greater than third argument or beyond array bounds.
+
+#### Example
+```c
+int cmp_func(const void *ele_1, const void *ele_2)
+{
+	return *((char *)ele_1) - *((char *) ele_2);
+}
+
+size_t error_val;
+edsa_exparr *arr;
+
+...
+
+error_val = edsa_exparr_sort_segment(arr, 1, 2);
+```
 
 ### `edsa_exparr_read(edsa_exparr *arr, size_t index, void *data)`
 Copies data at index `index` from exparr `arr` to `*data`.
@@ -180,6 +215,11 @@ error_val = edsa_exparr_read(arr, 1, &c);
 
 ### Full exparr Example
 ```c
+int cmp_func(const void *ele_1, const void *ele_2)
+{
+	return *((char *)ele_1) - *((char *) ele_2);
+}
+
 size_t error_val;
 edsa_exparr *arr;
 char c = 'c';
@@ -189,6 +229,7 @@ error_val = edsa_exparr_init(&arr, 10, sizeof(char));
 error_val = edsa_exparr_ins(arr, 1, &c);
 error_val = edsa_exparr_read(arr, 1, &c);
 error_val = edsa_exparr_copy(arr, 1, 2);
+error_val = edsa_exparr_sort_segment(arr, 1, 2);
 error_val = edsa_exparr_free(arr);
 ```
 
