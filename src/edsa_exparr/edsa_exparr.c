@@ -167,6 +167,24 @@ size_t edsa_exparr_read(edsa_exparr *const restrict arr, size_t index, void *con
 	return EDSA_SUCCESS;
 }
 
+size_t edsa_exparr_sort_segment(edsa_exparr *const restrict arr, int (*cmp_func)(const void *, const void *), const size_t st_index, const size_t end_index)
+{
+	if(st_index <= end_index){
+		return EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX;
+	}
+
+	if(end_index >= arr->arr_size){
+		return EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX;
+	}
+
+	size_t segment_len = end_index - st_index;
+	++segment_len;
+
+	qsort(((char *) arr->arr) + arr->data_size * st_index, segment_len, arr->data_size, cmp_func);
+
+	return EDSA_SUCCESS;
+}
+
 size_t edsa_exparr_free(edsa_exparr *const restrict arr)
 {
 	free(arr->arr);
