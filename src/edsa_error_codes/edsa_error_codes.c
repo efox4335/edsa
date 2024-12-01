@@ -131,6 +131,9 @@ size_t edsa_get_error_string(size_t error, char **str)
 		case EDSA_HTABLE_REMOVE_MALLOC_FAIL:
 			*str = "EDSA_HTABLE_REMOVE_MALLOC_FAIL";
 			break;
+		case EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX:
+			*str = "EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX";
+			break;
 		default:
 			*str = "UNKNOWN_ERROR";
 			break;
