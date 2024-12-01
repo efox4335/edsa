@@ -5,7 +5,7 @@
 
 int cmp_func(const void *ele_1, const void *ele_2)
 {
-	return *((int *)ele_1) > *((int *) ele_2);
+	return *((int *)ele_1) - *((int *) ele_2);
 }
 
 void set_arr_inv(size_t *arr, size_t size)
