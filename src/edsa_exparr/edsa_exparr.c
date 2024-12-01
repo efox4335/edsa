@@ -169,7 +169,7 @@ size_t edsa_exparr_read(edsa_exparr *const restrict arr, size_t index, void *con
 
 size_t edsa_exparr_sort_segment(edsa_exparr *const restrict arr, int (*cmp_func)(const void *, const void *), const size_t st_index, const size_t end_index)
 {
-	if(st_index <= end_index){
+	if(st_index >= end_index){
 		return EDSA_EXPARR_SORT_SEGMENT_INVALID_END_INDEX;
 	}
 
